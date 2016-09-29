@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PEproject>
   <Header>
-    <Name>INTRO_Remote_Master</Name>
-    <SavedBy>Erich Styger Local</SavedBy>
+    <Name>INTRO_Remote_HALLOWorld</Name>
+    <SavedBy>Manuel</SavedBy>
     <ModificationStamp>3</ModificationStamp>
-    <Date>2016-09-20</Date>
+    <Date>2016-09-29</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>108</ProjectCompNumb>
+    <ProjectCompNumb>118</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -958,8 +958,8 @@
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-        <EnumSymbVal>8</EnumSymbVal>
         <Index>0</Index>
+        <EnumSymbVal>8</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>DflashSettingsGrp</ItemSymbol>
@@ -5501,7 +5501,7 @@
     </ItemState>
   </Configuration>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>FreeRTOS</BeanType>
     <Name>FRTOS1</Name>
     <CompNumb>5</CompNumb>
@@ -5927,73 +5927,7 @@
         <Value>SWI</Value>
         <RegCompType>SWI</RegCompType>
         <RegCompRepository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</RegCompRepository>
-        <InheritedComponentState>
-          <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
-          <ComponentUUID>com.freescale.processorexpert.interruptvector</ComponentUUID>
-          <BeanType>InterruptVector</BeanType>
-          <Name>RTOSSWI1</Name>
-          <CompNumb>6</CompNumb>
-          <CompEnabled>true</CompEnabled>
-          <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
-          <IconName>PERIPHINSP</IconName>
-          <UserFolderName />
-          <Comment lines_count="0" />
-          <Template />
-          <BeanVersion>02.023</BeanVersion>
-          <LightErrorsIgnored>false</LightErrorsIgnored>
-          <Properties>
-            <ItemState>
-              <ItemSymbol>DeviceName</ItemSymbol>
-              <ReadOnly>true</ReadOnly>
-              <UserReadOnly>true</UserReadOnly>
-              <Value>RTOSSWI1</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>Vector</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <Value />
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>InitPriority</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Value>medium priority</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>ShrInt</ItemSymbol>
-              <ReadOnly>true</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Value>false</Value>
-              <Expanded>false</Expanded>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>IntSrc</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <Value />
-              <SharedPrphMode>false</SharedPrphMode>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>Handle</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <Value>vPortYieldISR</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>AllowDuplicates</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-            </ItemState>
-          </Properties>
-          <Methods />
-          <Events />
-        </InheritedComponentState>
+        <InheritedComponentState />
       </ItemState>
       <ItemState>
         <ItemSymbol>UsePreemption</ItemSymbol>
@@ -7939,7 +7873,7 @@
     </Events>
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>RNet</BeanType>
     <Name>RNET1</Name>
     <CompNumb>8</CompNumb>
@@ -8253,7 +8187,7 @@
     </Events>
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>nRF24L01</BeanType>
     <Name>RF1</Name>
     <CompNumb>9</CompNumb>
@@ -10938,9 +10872,8 @@
             <ItemState>
               <ItemSymbol>ChipSelectList</ItemSymbol>
               <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
               <ListItemCount>0</ListItemCount>
-              <Index>0</Index>
+              <UserReadOnly>false</UserReadOnly>
               <Expanded>true</Expanded>
             </ItemState>
             <ItemState>
@@ -11008,9 +10941,8 @@
             <ItemState>
               <ItemSymbol>AttributeSetList</ItemSymbol>
               <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
               <ListItemCount>1</ListItemCount>
-              <Index>0</Index>
+              <UserReadOnly>false</UserReadOnly>
               <Expanded>true</Expanded>
             </ItemState>
             <ItemState>
@@ -12972,7 +12904,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>SeggerRTT</BeanType>
     <Name>RTT1</Name>
     <CompNumb>23</CompNumb>
@@ -13378,7 +13310,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>SeggerSystemView</BeanType>
     <Name>SYS1</Name>
     <CompNumb>24</CompNumb>
@@ -13683,7 +13615,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>PDC8544</BeanType>
     <Name>PDC1</Name>
     <CompNumb>27</CompNumb>
@@ -15932,7 +15864,7 @@
     </Events>
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>GenericSWSPI</BeanType>
     <Name>SPI1</Name>
     <CompNumb>37</CompNumb>
@@ -16604,591 +16536,6 @@
         <InheritedComponentState>
           <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
           <ComponentUUID>com.freescale.processorexpert.bitio</ComponentUUID>
-          <BeanType>BitIO</BeanType>
-          <Name>Input1</Name>
-          <CompNumb>46</CompNumb>
-          <CompEnabled>true</CompEnabled>
-          <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
-          <IconName>BITIO</IconName>
-          <UserFolderName />
-          <Comment lines_count="0" />
-          <Template />
-          <BeanVersion>02.086</BeanVersion>
-          <LightErrorsIgnored>false</LightErrorsIgnored>
-          <Properties>
-            <ItemState>
-              <ItemSymbol>DeviceName</ItemSymbol>
-              <ReadOnly>true</ReadOnly>
-              <UserReadOnly>true</UserReadOnly>
-              <Value>Input1</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>_Pin</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <Value />
-              <SharedPrphMode>false</SharedPrphMode>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>PinSignal</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <Value />
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>FeatureCondGrpLDD</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>InheritedComponent</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <Index>0</Index>
-              <RegCompType>BitIO_LDD</RegCompType>
-              <RegCompRepository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</RegCompRepository>
-              <InheritedComponentState>
-                <Repository>file:/${ProcessorExpert_loc}/Repositories/Kinetis_Repository</Repository>
-                <ComponentUUID>com.freescale.processorexpert.ldd.bitio_ldd</ComponentUUID>
-                <BeanType>BitIO_LDD</BeanType>
-                <Name>BitIoLdd3</Name>
-                <CompNumb>97</CompNumb>
-                <CompEnabled>true</CompEnabled>
-                <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
-                <IconName>PORT_LDD</IconName>
-                <UserFolderName />
-                <Comment lines_count="0" />
-                <Template>BitIO\BitIO_LDD</Template>
-                <BeanVersion>01.033</BeanVersion>
-                <LightErrorsIgnored>false</LightErrorsIgnored>
-                <Properties>
-                  <ItemState>
-                    <ItemSymbol>DeviceName</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>true</UserReadOnly>
-                    <Value>BitIoLdd3</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>_Pin</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <Value />
-                    <SharedPrphMode>false</SharedPrphMode>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>PinSignal</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <Value />
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>ElProp</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>PullMode</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <TypeSpecNameState>typePULL</TypeSpecNameState>
-                    <Index>5</Index>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>ODE</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>Reduce</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>LEDdrive</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>Dir</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>2</Index>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>InitGrp</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>InitDir</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>1</Index>
-                    <Value>false</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>InitValue</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>1</Index>
-                    <Value>false</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>AutoInitialization</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>SafeMode</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>OptCpuGroup</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>Optimization</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>SimulinkGrp</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>DeviceNameSimulink</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>DirSimulink</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>ReentrantMethods</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>1</Index>
-                    <Value>false</Value>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>UseRapidGpioOrEnhancedGroup</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>UseRGPIO</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <EnumSymbVal>0</EnumSymbVal>
-                  </ItemState>
-                </Properties>
-                <Methods>
-                  <ItemState>
-                    <ItemSymbol>Init</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>true</LastSelection>
-                    <LastUserSel>yes</LastUserSel>
-                    <UsrMethodName>Init</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>Deinit</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>Deinit</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>GetDir</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>GetDir</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>SetDir</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>SetDir</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>SetInput</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>SetInput</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>SetOutput</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>SetOutput</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>GetVal</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>GetVal</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>PutVal</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>PutVal</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>ClrVal</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>ClrVal</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>SetVal</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>SetVal</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>NegVal</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>NegVal</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>56800grp</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>ConnectPin</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>ConnectPin</UsrMethodName>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>Hcs12Grp</ItemSymbol>
-                    <ReadOnly>false</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                  </ItemState>
-                  <ItemState>
-                    <ItemSymbol>GetRawVal</ItemSymbol>
-                    <ReadOnly>true</ReadOnly>
-                    <UserReadOnly>false</UserReadOnly>
-                    <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-                    <Index>0</Index>
-                    <Value>true</Value>
-                    <LastSelection>false</LastSelection>
-                    <LastUserSel>no</LastUserSel>
-                    <UsrMethodName>GetRawVal</UsrMethodName>
-                  </ItemState>
-                </Methods>
-                <Events />
-              </InheritedComponentState>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>ElProp</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>PullMode</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <TypeSpecNameState>typePULL</TypeSpecNameState>
-              <Index>5</Index>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>ODE</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>Reduce</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>LEDdrive</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>Dir</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>2</Index>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>InitGrp</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>InitDir</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>InitValue</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>SafeMode</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>Optimization</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>SimulinkGrp</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>DeviceNameSimulink</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>DirSimulink</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-            </ItemState>
-          </Properties>
-          <Methods>
-            <ItemState>
-              <ItemSymbol>GetDir</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>no</LastUserSel>
-              <UsrMethodName>GetDir</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>SetDir</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>yes</LastUserSel>
-              <UsrMethodName>SetDir</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>SetInput</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>no</LastUserSel>
-              <UsrMethodName>SetInput</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>SetOutput</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>no</LastUserSel>
-              <UsrMethodName>SetOutput</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>GetVal</ItemSymbol>
-              <ReadOnly>true</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>yes</LastUserSel>
-              <UsrMethodName>GetVal</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>PutVal</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>yes</LastUserSel>
-              <UsrMethodName>PutVal</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>ClrVal</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>yes</LastUserSel>
-              <UsrMethodName>ClrVal</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>SetVal</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <Value>true</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>yes</LastUserSel>
-              <UsrMethodName>SetVal</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>NegVal</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>no</LastUserSel>
-              <UsrMethodName>NegVal</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>56800grp</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>ConnectPin</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>no</LastUserSel>
-              <UsrMethodName>ConnectPin</UsrMethodName>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>Hcs12Grp</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-            </ItemState>
-            <ItemState>
-              <ItemSymbol>GetRawVal</ItemSymbol>
-              <ReadOnly>false</ReadOnly>
-              <UserReadOnly>false</UserReadOnly>
-              <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <Value>false</Value>
-              <LastSelection>true</LastSelection>
-              <LastUserSel>no</LastUserSel>
-              <UsrMethodName>GetRawVal</UsrMethodName>
-            </ItemState>
-          </Methods>
-          <Events />
         </InheritedComponentState>
       </ItemState>
       <ItemState>
@@ -17926,7 +17273,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>GDisplay</BeanType>
     <Name>GDisp1</Name>
     <CompNumb>49</CompNumb>
@@ -18406,7 +17753,7 @@
     </Events>
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>GFont</BeanType>
     <Name>GFONT1</Name>
     <CompNumb>50</CompNumb>
@@ -18555,7 +17902,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>FontDisplay</BeanType>
     <Name>FDisp1</Name>
     <CompNumb>51</CompNumb>
@@ -18690,7 +18037,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>LED</BeanType>
     <Name>LCD_LED</Name>
     <CompNumb>52</CompNumb>
@@ -32283,9 +31630,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disabled</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput16FeatureCondGroup</ItemSymbol>
@@ -32307,9 +31653,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>0</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>OpenDrainEnable16FeatureCondGroup</ItemSymbol>
@@ -32321,9 +31666,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullEnable16FeatureCondGroup</ItemSymbol>
@@ -32335,9 +31679,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>2</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullSelect16FeatureCondGroup</ItemSymbol>
@@ -32349,9 +31692,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>down</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>SlewRateEnable16FeatureCondGroup</ItemSymbol>
@@ -32363,9 +31705,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>fast</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DriveStrengthEnable16FeatureCondGroup</ItemSymbol>
@@ -32377,9 +31718,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>low</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>InterruptConfiguration16FeatureCondGroup</ItemSymbol>
@@ -32391,9 +31731,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DigitalFilter16FeatureCondGroup</ItemSymbol>
@@ -32419,9 +31758,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>Lock16FeatureCondGroup</ItemSymbol>
@@ -32433,9 +31771,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinEn17FeatureCondGroup</ItemSymbol>
@@ -32455,9 +31792,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disabled</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput17FeatureCondGroup</ItemSymbol>
@@ -32479,9 +31815,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>0</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>OpenDrainEnable17FeatureCondGroup</ItemSymbol>
@@ -32493,9 +31828,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullEnable17FeatureCondGroup</ItemSymbol>
@@ -32507,9 +31841,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>2</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullSelect17FeatureCondGroup</ItemSymbol>
@@ -32521,9 +31854,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>down</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>SlewRateEnable17FeatureCondGroup</ItemSymbol>
@@ -32535,9 +31867,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>fast</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DriveStrengthEnable17FeatureCondGroup</ItemSymbol>
@@ -32549,9 +31880,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>low</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>InterruptConfiguration17FeatureCondGroup</ItemSymbol>
@@ -32563,9 +31893,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DigitalFilter17FeatureCondGroup</ItemSymbol>
@@ -32591,9 +31920,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>Lock17FeatureCondGroup</ItemSymbol>
@@ -32605,9 +31933,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinEn18FeatureCondGroup</ItemSymbol>
@@ -36805,9 +36132,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disabled</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput4FeatureCondGroup</ItemSymbol>
@@ -36829,9 +36155,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>0</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>OpenDrainEnable4FeatureCondGroup</ItemSymbol>
@@ -36843,9 +36168,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullEnable4FeatureCondGroup</ItemSymbol>
@@ -36857,9 +36181,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>2</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullSelect4FeatureCondGroup</ItemSymbol>
@@ -36871,9 +36194,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>down</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>SlewRateEnable4FeatureCondGroup</ItemSymbol>
@@ -36885,9 +36207,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>fast</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DriveStrengthEnable4FeatureCondGroup</ItemSymbol>
@@ -36899,9 +36220,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>low</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>InterruptConfiguration4FeatureCondGroup</ItemSymbol>
@@ -36913,9 +36233,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DigitalFilter4FeatureCondGroup</ItemSymbol>
@@ -36941,9 +36260,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>Lock4FeatureCondGroup</ItemSymbol>
@@ -36955,9 +36273,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinEn5FeatureCondGroup</ItemSymbol>
@@ -36977,9 +36294,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disabled</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput5FeatureCondGroup</ItemSymbol>
@@ -37001,9 +36317,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>0</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>OpenDrainEnable5FeatureCondGroup</ItemSymbol>
@@ -37015,9 +36330,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullEnable5FeatureCondGroup</ItemSymbol>
@@ -37029,9 +36343,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>2</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullSelect5FeatureCondGroup</ItemSymbol>
@@ -37043,9 +36356,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>down</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>SlewRateEnable5FeatureCondGroup</ItemSymbol>
@@ -37057,9 +36369,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>fast</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DriveStrengthEnable5FeatureCondGroup</ItemSymbol>
@@ -37071,9 +36382,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>low</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>InterruptConfiguration5FeatureCondGroup</ItemSymbol>
@@ -37085,9 +36395,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DigitalFilter5FeatureCondGroup</ItemSymbol>
@@ -37113,9 +36422,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>Lock5FeatureCondGroup</ItemSymbol>
@@ -37127,9 +36435,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinEn6FeatureCondGroup</ItemSymbol>
@@ -37149,9 +36456,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disabled</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput6FeatureCondGroup</ItemSymbol>
@@ -37173,9 +36479,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>0</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>OpenDrainEnable6FeatureCondGroup</ItemSymbol>
@@ -37187,9 +36492,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullEnable6FeatureCondGroup</ItemSymbol>
@@ -37201,9 +36505,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>2</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullSelect6FeatureCondGroup</ItemSymbol>
@@ -37215,9 +36518,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>down</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>SlewRateEnable6FeatureCondGroup</ItemSymbol>
@@ -37229,9 +36531,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>fast</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DriveStrengthEnable6FeatureCondGroup</ItemSymbol>
@@ -37243,9 +36544,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>low</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>InterruptConfiguration6FeatureCondGroup</ItemSymbol>
@@ -37257,9 +36557,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DigitalFilter6FeatureCondGroup</ItemSymbol>
@@ -37285,9 +36584,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>Lock6FeatureCondGroup</ItemSymbol>
@@ -37299,9 +36597,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinEn7FeatureCondGroup</ItemSymbol>
@@ -37321,9 +36618,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disabled</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput7FeatureCondGroup</ItemSymbol>
@@ -37345,9 +36641,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>0</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>OpenDrainEnable7FeatureCondGroup</ItemSymbol>
@@ -37359,9 +36654,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullEnable7FeatureCondGroup</ItemSymbol>
@@ -37373,9 +36667,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>2</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PullSelect7FeatureCondGroup</ItemSymbol>
@@ -37387,9 +36680,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>down</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>SlewRateEnable7FeatureCondGroup</ItemSymbol>
@@ -37401,9 +36693,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>fast</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DriveStrengthEnable7FeatureCondGroup</ItemSymbol>
@@ -37415,9 +36706,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>low</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>InterruptConfiguration7FeatureCondGroup</ItemSymbol>
@@ -37429,9 +36719,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>0</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>DigitalFilter7FeatureCondGroup</ItemSymbol>
@@ -37457,9 +36746,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>Lock7FeatureCondGroup</ItemSymbol>
@@ -37471,9 +36759,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <EnumSymbVal>disable</EnumSymbVal>
         <Index>1</Index>
-        <EnumSymbVal />
-        <Value />
       </ItemState>
       <ItemState>
         <ItemSymbol>PinEn8FeatureCondGroup</ItemSymbol>
@@ -49469,7 +48756,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>FSL_USB_Stack</BeanType>
     <Name>USB1</Name>
     <CompNumb>84</CompNumb>
@@ -49520,9 +48807,9 @@
         <UserReadOnly>false</UserReadOnly>
         <Index>0</Index>
         <RegCompType>FSL_USB_CDC_Device</RegCompType>
-        <RegCompRepository>file:/${ProcessorExpertPath:user}</RegCompRepository>
+        <RegCompRepository>file:/${home_ProcessorExpert_loc}/MyComponents</RegCompRepository>
         <InheritedComponentState>
-          <Repository>file:/${ProcessorExpertPath:user}</Repository>
+          <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
           <BeanType>FSL_USB_CDC_Device</BeanType>
           <Name>CDC1</Name>
           <CompNumb>86</CompNumb>
@@ -49669,9 +48956,9 @@
               <UserReadOnly>false</UserReadOnly>
               <Index>0</Index>
               <RegCompType>RingBuffer</RegCompType>
-              <RegCompRepository>file:/${ProcessorExpertPath:user}</RegCompRepository>
+              <RegCompRepository>file:/${home_ProcessorExpert_loc}/MyComponents</RegCompRepository>
               <InheritedComponentState>
-                <Repository>file:/${ProcessorExpertPath:user}</Repository>
+                <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
                 <BeanType>RingBuffer</BeanType>
                 <Name>Tx1</Name>
                 <CompNumb>87</CompNumb>
@@ -49974,9 +49261,9 @@
               <UserReadOnly>false</UserReadOnly>
               <Index>0</Index>
               <RegCompType>RingBuffer</RegCompType>
-              <RegCompRepository>file:/${ProcessorExpertPath:user}</RegCompRepository>
+              <RegCompRepository>file:/${home_ProcessorExpert_loc}/MyComponents</RegCompRepository>
               <InheritedComponentState>
-                <Repository>file:/${ProcessorExpertPath:user}</Repository>
+                <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
                 <BeanType>RingBuffer</BeanType>
                 <Name>Rx1</Name>
                 <CompNumb>88</CompNumb>
@@ -50747,9 +50034,8 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>1</Index>
-              <EnumSymbVal />
               <Value />
+              <EnumSymbVal />
             </ItemState>
             <ItemState>
               <ItemSymbol>ClockSettingGrp</ItemSymbol>
@@ -50829,9 +50115,8 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <EnumSymbVal />
               <Value />
+              <EnumSymbVal />
             </ItemState>
             <ItemState>
               <ItemSymbol>DividerInputFreq</ItemSymbol>
@@ -50860,9 +50145,8 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <EnumSymbVal />
               <Value />
+              <EnumSymbVal />
             </ItemState>
             <ItemState>
               <ItemSymbol>ModuleClockFreq</ItemSymbol>
@@ -51930,9 +51214,8 @@
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
               <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-              <Index>0</Index>
-              <EnumSymbVal />
               <Value />
+              <EnumSymbVal />
             </ItemState>
             <ItemState>
               <ItemSymbol>InterruptVector_OTG_ID_CHGPExPriorityFeatureGroup</ItemSymbol>
@@ -52326,7 +51609,7 @@
     </Events>
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>Shell</BeanType>
     <Name>CLS1</Name>
     <CompNumb>17</CompNumb>
@@ -52906,7 +52189,7 @@
     </Events>
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>Timeout</BeanType>
     <Name>TMOUT1</Name>
     <CompNumb>89</CompNumb>
@@ -53050,7 +52333,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>Wait</BeanType>
     <Name>WAIT1</Name>
     <CompNumb>25</CompNumb>
@@ -53249,7 +52532,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>Utility</BeanType>
     <Name>UTIL1</Name>
     <CompNumb>26</CompNumb>
@@ -54026,7 +53309,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>KinetisSDK</BeanType>
     <Name>KSDK1</Name>
     <CompNumb>19</CompNumb>
@@ -54067,7 +53350,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>HardFault</BeanType>
     <Name>HF1</Name>
     <CompNumb>103</CompNumb>
@@ -54109,7 +53392,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>CriticalSection</BeanType>
     <Name>CS1</Name>
     <CompNumb>18</CompNumb>
@@ -54189,7 +53472,7 @@
     <Events />
   </Bean>
   <Bean>
-    <Repository>file:/${ProcessorExpertPath:user}</Repository>
+    <Repository>file:/${home_ProcessorExpert_loc}/MyComponents</Repository>
     <BeanType>KinetisTools</BeanType>
     <Name>KIN1</Name>
     <CompNumb>90</CompNumb>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>INTRO_FRDM_Master</name>
+	<name>INTRO_FRDM_HALLOWorld</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -34,7 +34,13 @@
 		<link>
 			<name>Sources/INTRO_Common</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/INTRO_Common</locationURI>
+			<locationURI>copy_PARENT/INTRO_Common</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/__Hslu/Infotronic/GIT_ThomasManuel</value>
+		</variable>
+	</variableList>
 </projectDescription>
