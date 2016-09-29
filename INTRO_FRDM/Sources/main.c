@@ -1,10 +1,10 @@
 /* ###################################################################
 **     Filename    : main.c
-**     Project     : TestRoboter
-**     Processor   : MK22FX512VLQ12
+**     Project     : INTRO_FRDM_Master
+**     Processor   : MKL25Z128VLK4
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-22, 16:13, # CodeGen: 0
+**     Date/Time   : 2016-09-20, 21:02, # CodeGen: 0
 **     Abstract    :
 **         Main module.
 **         This module contains user's application code.
@@ -30,14 +30,21 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
-#include "Bit1.h"
-#include "BitIoLdd1.h"
+#include "LEDPin1.h"
+#include "BitIoLdd10.h"
+#include "WAIT1.h"
+#include "CS1.h"
+#include "HF1.h"
+#include "KSDK1.h"
+#include "UTIL1.h"
+#include "KIN1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Application.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -50,7 +57,16 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
-  /* For example: for(;;) { } */
+  for(;;) {
+	  LEDPin1_PutVal(1);
+	  WAIT1_Waitms(100);
+	  LEDPin1_PutVal(0);
+	  WAIT1_Waitms(100);
+
+  }
+
+
+  APP_Start();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
