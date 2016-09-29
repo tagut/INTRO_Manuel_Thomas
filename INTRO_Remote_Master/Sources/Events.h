@@ -1,11 +1,11 @@
 /* ###################################################################
 **     Filename    : Events.h
-**     Project     : TestRoboter
-**     Processor   : MK22FX512VLQ12
+**     Project     : INTRO_Remote_Master
+**     Processor   : MK20DX128VFT5
 **     Component   : Events
 **     Version     : Driver 01.00
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-22, 16:13, # CodeGen: 0
+**     Date/Time   : 2016-09-20, 21:05, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -33,17 +33,12 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
-<<<<<<< HEAD
-#include "LEDRedL.h"
-#include "BitIoLdd1.h"
-#include "LEDRedR.h"
-#include "BitIoLdd2.h"
 #include "WAIT1.h"
+#include "UTIL1.h"
+#include "KIN1.h"
 #include "KSDK1.h"
-=======
-#include "Bit1.h"
-#include "BitIoLdd1.h"
->>>>>>> 195497f20502a5f905730f9f32bd39d066a53558
+#include "HF1.h"
+#include "CS1.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,7 +48,7 @@ extern "C" {
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
 **
-**     Component   :  Cpu [MK22FN1M0LQ12]
+**     Component   :  Cpu [MK20DX128EX5]
 */
 /*!
 **     @brief

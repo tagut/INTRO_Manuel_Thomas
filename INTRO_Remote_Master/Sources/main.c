@@ -1,10 +1,10 @@
 /* ###################################################################
 **     Filename    : main.c
-**     Project     : TestRoboter
-**     Processor   : MK22FX512VLQ12
+**     Project     : INTRO_Remote_Master
+**     Processor   : MK20DX128VFT5
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-22, 16:13, # CodeGen: 0
+**     Date/Time   : 2016-09-20, 21:05, # CodeGen: 0
 **     Abstract    :
 **         Main module.
 **         This module contains user's application code.
@@ -30,23 +30,19 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
-<<<<<<< HEAD
-#include "LEDRedL.h"
-#include "BitIoLdd1.h"
-#include "LEDRedR.h"
-#include "BitIoLdd2.h"
 #include "WAIT1.h"
+#include "UTIL1.h"
+#include "KIN1.h"
 #include "KSDK1.h"
-=======
-#include "Bit1.h"
-#include "BitIoLdd1.h"
->>>>>>> 195497f20502a5f905730f9f32bd39d066a53558
+#include "HF1.h"
+#include "CS1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Application.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -58,18 +54,8 @@ int main(void)
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
 
-  for(;;){
-
-  	  LEDRedL_SetVal();
-  	  LEDRedR_ClrVal();
-  	  WAIT1_Waitms(1000);
-  	  LEDRedL_ClrVal();
-  	  LEDRedR_SetVal();
-  	  WAIT1_Waitms(1000);
-
-
-    }
   /* Write your code here */
+  APP_Start();
   /* For example: for(;;) { } */
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
