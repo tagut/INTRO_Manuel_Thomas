@@ -1,0 +1,16 @@
+diff a/TestRoboter/ProcessorExpert.pe b/TestRoboter/ProcessorExpert.pe	(rejected hunks)
+@@ -22553,11 +22553,13 @@
+       <Count>0</Count>
+     </BoolList_FpgaConfig>
+     <BoolList_BeanConfig>
+-      <Count>2</Count>
++      <Count>3</Count>
+       <ItemId0>2</ItemId0>
+       <Value0>false</Value0>
+       <ItemId1>4</ItemId1>
+       <Value1>true</Value1>
++      <ItemId2>5</ItemId2>
++      <Value2>true</Value2>
+     </BoolList_BeanConfig>
+     <BoolList_TaskConfig>
+       <Count>0</Count>
