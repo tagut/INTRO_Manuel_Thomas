@@ -6,7 +6,7 @@
 **     Version     : Component 01.014, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-26, 15:36, # CodeGen: 0
+**     Date/Time   : 2016-09-29, 15:10, # CodeGen: 3
 **     Abstract    :
 **
 **     Settings    :
@@ -63,6 +63,16 @@
 #include "Cpu.h"
 
 /*lint -esym(765,PE_PeripheralUsed,LDD_SetClockConfiguration,PE_CpuClockConfigurations,PE_FillMemory) Disable MISRA rule (8.10) checking for symbols (PE_PeripheralUsed,LDD_SetClockConfiguration,PE_CpuClockConfigurations,PE_FillMemory). */
+
+/*
+** ===========================================================================
+** Array of initialized device structures of LDD components.
+** ===========================================================================
+*/
+LDD_TDeviceData *PE_LDD_DeviceDataList[2] = {
+    NULL,
+    NULL
+  };
 
 /*
 ** ===========================================================================
@@ -128,8 +138,19 @@ void PE_FillMemory(register void* SourceAddressPtr, register uint8_t c, register
 /* ===================================================================*/
 bool PE_PeripheralUsed(uint32_t PrphBaseAddress)
 {
-  (void)PrphBaseAddress;               /*!< Parameter is not used, suppress unused argument warning */
-  return FALSE;
+  bool result = FALSE;
+
+  switch (PrphBaseAddress) {
+    /* Base address allocated by peripheral(s) PTD */
+    case 0x400FF0C0UL:
+    /* Base address allocated by peripheral(s) PTA */
+    case 0x400FF000UL:
+      result = TRUE;
+      break;
+    default:
+      break;
+  }
+  return result;
 }
 
 /*

@@ -6,7 +6,7 @@
 **     Version     : Component 01.014, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-09-26, 15:36, # CodeGen: 0
+**     Date/Time   : 2016-09-29, 15:22, # CodeGen: 4
 **     Abstract    :
 **
 **     Settings    :
@@ -61,6 +61,12 @@
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
+#include "LEDRedL.h"
+#include "BitIoLdd1.h"
+#include "LEDRedR.h"
+#include "BitIoLdd2.h"
+#include "WAIT1.h"
+#include "KSDK1.h"
 
 
 /*
