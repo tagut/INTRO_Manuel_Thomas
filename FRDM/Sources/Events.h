@@ -39,9 +39,12 @@
 #include "HF1.h"
 #include "CS1.h"
 #include "KIN1.h"
-#include "LED1.h"
 #include "LEDpin1.h"
-#include "BitIoLdd13.h"
+#include "BitIoLdd10.h"
+#include "LEDPin2.h"
+#include "BitIoLdd11.h"
+#include "LEDPin3.h"
+#include "BitIoLdd12.h"
 
 #ifdef __cplusplus
 extern "C" {

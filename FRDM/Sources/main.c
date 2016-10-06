@@ -36,9 +36,12 @@
 #include "HF1.h"
 #include "CS1.h"
 #include "KIN1.h"
-#include "LED1.h"
 #include "LEDpin1.h"
-#include "BitIoLdd13.h"
+#include "BitIoLdd10.h"
+#include "LEDPin2.h"
+#include "BitIoLdd11.h"
+#include "LEDPin3.h"
+#include "BitIoLdd12.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -57,8 +60,21 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
-  /* For example: for(;;) { } */
-  LED1_On();
+  /* For example:*/
+  for(;;) {
+	  LEDPin1_ClrVal();
+	  WAIT1_Waitms(1000);
+	  LEDPin1_SetVal();
+	  LEDPin2_ClrVal();
+	  WAIT1_Waitms(1000);
+	  LEDPin2_SetVal();
+	  LEDPin3_ClrVal();
+	  WAIT1_Waitms(1000);
+	  LEDPin3_SetVal();
+
+
+  }
+
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START
