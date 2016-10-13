@@ -30,21 +30,33 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "SW1.h"
+#include "ExtIntLdd1.h"
 #include "WAIT1.h"
 #include "UTIL1.h"
 #include "KSDK1.h"
 #include "HF1.h"
 #include "CS1.h"
 #include "KIN1.h"
-#include "LED1.h"
 #include "LEDpin1.h"
-#include "BitIoLdd13.h"
+#include "BitIoLdd10.h"
+#include "LEDPin2.h"
+#include "BitIoLdd11.h"
+#include "LEDPin3.h"
+#include "BitIoLdd12.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Event.h"
+#include "Application.h"
+#include "Event.h"
+
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -57,8 +69,34 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
-  /* For example: for(;;) { } */
-  LED1_On();
+  /* For example:*/
+  EVNT_Init();
+  for(;;) {
+
+	  WAIT1_Waitms(100);
+	  EVNT_HandleEvent((*APP_HandleEvent),1);
+	  //WAIT1_Waitms(100);
+
+/*
+	  int i[10];
+	  int* ia = NULL;
+	  LEDPin1_ClrVal();
+	  WAIT1_Waitms(1000);
+	  CS1_EnterCritical();
+
+	  LEDPin1_SetVal();
+	  CS1_ExitCritical();
+	  LEDPin2_ClrVal();
+	  i[1245523] = 100 ;
+	  WAIT1_Waitms(1000);
+	  LEDPin2_SetVal();
+	  LEDPin3_ClrVal();
+	  WAIT1_Waitms(1000);
+	  LEDPin3_SetVal();
+*/
+
+  }
+
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START

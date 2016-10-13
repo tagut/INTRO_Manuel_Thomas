@@ -19,18 +19,17 @@
   #include "Tacho.h"
 #endif
 
-
+#define TMR_HARTBEAT 1000 //Time in MS
 
 void TMR_OnInterrupt(void) {
-	static unsigned int counter;
-	#define BLINK_PERIOD_MS 1000
-	counter++;
-	if((counter%(BLINK_PERIOD_MS/TMR_TICK_MS))==0){
-		EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-	}
-
   /* this one gets called from an interrupt!!!! */
   /*! \todo Add code for a blinking LED here */
+	static uint8 counter = 0;
+	counter ++;
+	if(counter == TMR_HARTBEAT/TMR_TICK_MS){
+		EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+		counter = 0;
+	}
 }
 
 void TMR_Init(void) {
