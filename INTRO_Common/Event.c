@@ -65,6 +65,7 @@ void EVNT_HandleEvent(void (*callback)(EVNT_Handle), bool clearEvent) {
        break; /* get out of loop */
      }
    }
+   CS1_ExitCritical();
    if (event != EVNT_NOF_EVENTS) {
      callback(event);
      /* Note: if the callback sets the event, we will get out of the loop.

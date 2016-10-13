@@ -53,6 +53,7 @@ typedef enum EVNT_Handle {
   EVNT_SW7_RELEASED,
   EVNT_SW7_LPRESSED,
   #endif
+
 #endif
   /*!< \todo Your extra events here */
   EVNT_NOF_EVENTS       /*!< Must be last one! */

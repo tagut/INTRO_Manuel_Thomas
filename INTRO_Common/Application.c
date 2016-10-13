@@ -128,9 +128,12 @@ void APP_Start(void) {
 #if PL_CONFIG_HAS_EVENTS
     EVNT_HandleEvent(APP_EventHandler, TRUE);
 #endif
+
     WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
   }
 #endif
+
+
 }
 
 
