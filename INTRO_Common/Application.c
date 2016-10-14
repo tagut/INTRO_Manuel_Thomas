@@ -49,15 +49,28 @@ void APP_EventHandler(EVNT_Handle event) {
     break;
   case EVNT_LED_HEARTBEAT:
     LED1_Neg();
-
     break;
 
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-    LED2_Neg();
-    //CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    SHELL_SendString("SW1 pressed\r\n");
+    WAIT1_Waitms(50);
+    if (KEY1_Get()){
+    	int cnt = 0;
+    	while(KEY1_Get()){
+    		WAIT1_Waitms(10);
+    		cnt++;
+    	}
+    	if(cnt<= 100){
+    		LED2_Off();
+
+    	} else {
+    		LED2_On();
+
+    	}
+    	CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+    	//SHELL_SendString("SW1 pressed\r\n");
+    }
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
     #endif

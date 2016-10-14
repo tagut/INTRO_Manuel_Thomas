@@ -11,7 +11,9 @@
 #include "Shell.h"
 #include "CLS1.h"
 #include "Application.h"
-#include "FRTOS1.h"
+#if PL_CONFIG_HAS_RTOS
+	#include "FRTOS1.h"
+#endif
 #if PL_CONFIG_HAS_BLUETOOTH
   #include "BT1.h"
 #endif
@@ -210,78 +212,80 @@ void SHELL_ParseCmd(unsigned char *cmd) {
   #endif
   /* \todo Extend as needed */
 }
+#if PL_CONFIG_HAS_RTOS
+	static void ShellTask(void *pvParameters) {
+	  /* \todo Extend as needed */
+	#define DEFAULT_BUF_SIZE 48
+	#if CLS1_DEFAULT_SERIAL
+	  static unsigned char localConsole_buf[DEFAULT_BUF_SIZE];
+	#endif
+	#if PL_CONFIG_HAS_BLUETOOTH
+	  static unsigned char bluetooth_buf[DEFAULT_BUF_SIZE];
+	#endif
+	#if PL_CONFIG_HAS_SEGGER_RTT
+	  static unsigned char rtt_buf[DEFAULT_BUF_SIZE];
+	#endif
+	#if CLS1_DEFAULT_SERIAL
+	  CLS1_ConstStdIOTypePtr ioLocal = CLS1_GetStdio();
+	#endif
+	#if PL_CONFIG_HAS_RADIO && RNET_CONFIG_REMOTE_STDIO
+	  static unsigned char radio_cmd_buf[48];
+	  CLS1_ConstStdIOType *ioRemote = RSTDIO_GetStdioRx();
+	#endif
 
-static void ShellTask(void *pvParameters) {
-  /* \todo Extend as needed */
-#define DEFAULT_BUF_SIZE 48
-#if CLS1_DEFAULT_SERIAL
-  static unsigned char localConsole_buf[DEFAULT_BUF_SIZE];
-#endif
-#if PL_CONFIG_HAS_BLUETOOTH
-  static unsigned char bluetooth_buf[DEFAULT_BUF_SIZE];
-#endif
-#if PL_CONFIG_HAS_SEGGER_RTT
-  static unsigned char rtt_buf[DEFAULT_BUF_SIZE];
-#endif
-#if CLS1_DEFAULT_SERIAL
-  CLS1_ConstStdIOTypePtr ioLocal = CLS1_GetStdio();  
-#endif
-#if PL_CONFIG_HAS_RADIO && RNET_CONFIG_REMOTE_STDIO
-  static unsigned char radio_cmd_buf[48];
-  CLS1_ConstStdIOType *ioRemote = RSTDIO_GetStdioRx();
+	  (void)pvParameters; /* not used */
+	#if PL_CONFIG_HAS_BLUETOOTH
+	  bluetooth_buf[0] = '\0';
+	#endif
+	#if PL_CONFIG_HAS_SEGGER_RTT
+	  rtt_buf[0] = '\0';
+	#endif
+	#if CLS1_DEFAULT_SERIAL
+	  localConsole_buf[0] = '\0';
+	#endif
+	#if PL_CONFIG_HAS_RADIO && RNET_CONFIG_REMOTE_STDIO
+	  radio_cmd_buf[0] = '\0';
+	#endif
+	#if CLS1_DEFAULT_SERIAL
+	  (void)CLS1_ParseWithCommandTable((unsigned char*)CLS1_CMD_HELP, ioLocal, CmdParserTable);
+	#endif
+	  for(;;) {
+	#if CLS1_DEFAULT_SERIAL
+		(void)CLS1_ReadAndParseWithCommandTable(localConsole_buf, sizeof(localConsole_buf), ioLocal, CmdParserTable);
+	#endif
+	#if PL_CONFIG_HAS_BLUETOOTH
+		(void)CLS1_ReadAndParseWithCommandTable(bluetooth_buf, sizeof(bluetooth_buf), &BT_stdio, CmdParserTable);
+	#endif
+	#if PL_CONFIG_HAS_SEGGER_RTT
+		(void)CLS1_ReadAndParseWithCommandTable(rtt_buf, sizeof(rtt_buf), &RTT_stdio, CmdParserTable);
+	#endif
+	#if PL_CONFIG_HAS_RADIO && RNET_CONFIG_REMOTE_STDIO
+		RSTDIO_Print(ioLocal); /* dispatch incoming messages */
+		(void)CLS1_ReadAndParseWithCommandTable(radio_cmd_buf, sizeof(radio_cmd_buf), ioRemote, CmdParserTable);
+	#endif
+
+	#if PL_CONFIG_HAS_SHELL_QUEUE
+	#if PL_CONFIG_SQUEUE_SINGLE_CHAR
+		{
+			/*! \todo Handle shell queue */
+		}
+	#else /* PL_CONFIG_SQUEUE_SINGLE_CHAR */
+		{
+		  const unsigned char *msg;
+
+		  msg = SQUEUE_ReceiveMessage();
+		  if (msg!=NULL) {
+			CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
+			FRTOS1_vPortFree((void*)msg);
+		  }
+		}
+	#endif /* PL_CONFIG_SQUEUE_SINGLE_CHAR */
+	#endif /* PL_CONFIG_HAS_SHELL_QUEUE */
+		FRTOS1_vTaskDelay(10/portTICK_PERIOD_MS);
+	  } /* for */
+	}
 #endif
 
-  (void)pvParameters; /* not used */
-#if PL_CONFIG_HAS_BLUETOOTH
-  bluetooth_buf[0] = '\0';
-#endif
-#if PL_CONFIG_HAS_SEGGER_RTT
-  rtt_buf[0] = '\0';
-#endif
-#if CLS1_DEFAULT_SERIAL
-  localConsole_buf[0] = '\0';
-#endif
-#if PL_CONFIG_HAS_RADIO && RNET_CONFIG_REMOTE_STDIO
-  radio_cmd_buf[0] = '\0';
-#endif
-#if CLS1_DEFAULT_SERIAL
-  (void)CLS1_ParseWithCommandTable((unsigned char*)CLS1_CMD_HELP, ioLocal, CmdParserTable);
-#endif
-  for(;;) {
-#if CLS1_DEFAULT_SERIAL
-    (void)CLS1_ReadAndParseWithCommandTable(localConsole_buf, sizeof(localConsole_buf), ioLocal, CmdParserTable);
-#endif
-#if PL_CONFIG_HAS_BLUETOOTH
-    (void)CLS1_ReadAndParseWithCommandTable(bluetooth_buf, sizeof(bluetooth_buf), &BT_stdio, CmdParserTable);
-#endif
-#if PL_CONFIG_HAS_SEGGER_RTT
-    (void)CLS1_ReadAndParseWithCommandTable(rtt_buf, sizeof(rtt_buf), &RTT_stdio, CmdParserTable);
-#endif
-#if PL_CONFIG_HAS_RADIO && RNET_CONFIG_REMOTE_STDIO
-    RSTDIO_Print(ioLocal); /* dispatch incoming messages */
-    (void)CLS1_ReadAndParseWithCommandTable(radio_cmd_buf, sizeof(radio_cmd_buf), ioRemote, CmdParserTable);
-#endif
-
-#if PL_CONFIG_HAS_SHELL_QUEUE
-#if PL_CONFIG_SQUEUE_SINGLE_CHAR
-    {
-        /*! \todo Handle shell queue */
-    }
-#else /* PL_CONFIG_SQUEUE_SINGLE_CHAR */
-    {
-      const unsigned char *msg;
-
-      msg = SQUEUE_ReceiveMessage();
-      if (msg!=NULL) {
-        CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
-        FRTOS1_vPortFree((void*)msg);
-      }
-    }
-#endif /* PL_CONFIG_SQUEUE_SINGLE_CHAR */
-#endif /* PL_CONFIG_HAS_SHELL_QUEUE */
-    FRTOS1_vTaskDelay(10/portTICK_PERIOD_MS);
-  } /* for */
-}
 
 void SHELL_Init(void) {
   SHELL_val = 0;

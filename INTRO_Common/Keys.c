@@ -19,10 +19,13 @@
 #if PL_CONFIG_BOARD_IS_ROBO_V2
   #include "PORT_PDD.h"
 #endif
-#include "FreeRTOSConfig.h"
-#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
-  #include "SYS1.h"
+#if PL_CONFIG_HAS_RTOS
+	#include "FreeRTOSConfig.h"
+	#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
+  	  #include "SYS1.h"
+	#endif
 #endif
+
 
 void KEY_Scan(void) {
   #if PL_CONFIG_NOF_KEYS >= 1 && !PL_CONFIG_KEY_1_ISR
