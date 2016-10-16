@@ -26,7 +26,7 @@ void TMR_OnInterrupt(void) {
   /*! \todo Add code for a blinking LED here */
 	static uint8 counter = 0;
 	counter ++;
-	if(counter == TMR_HARTBEAT/TMR_TICK_MS){
+	if(counter >= TMR_HARTBEAT/TMR_TICK_MS){
 		EVNT_SetEvent(EVNT_LED_HEARTBEAT);
 		counter = 0;
 	}
