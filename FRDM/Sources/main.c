@@ -32,6 +32,18 @@
 #include "Events.h"
 #include "SW1.h"
 #include "ExtIntLdd1.h"
+#include "SW2.h"
+#include "ExtIntLdd2.h"
+#include "SW3.h"
+#include "ExtIntLdd3.h"
+#include "SW4.h"
+#include "ExtIntLdd4.h"
+#include "SW5.h"
+#include "BitIoLdd5.h"
+#include "SW6.h"
+#include "BitIoLdd6.h"
+#include "SW7.h"
+#include "ExtIntLdd5.h"
 #include "WAIT1.h"
 #include "UTIL1.h"
 #include "KSDK1.h"
@@ -47,6 +59,9 @@
 #include "TI1.h"
 #include "TimerIntLdd1.h"
 #include "TU1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "CLS1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -72,10 +87,30 @@ int main(void)
   /* For example:*/
   EVNT_Init();
   for(;;) {
-
+	  /*
+	  LEDPin1_SetVal();
+	  if(CLS1_KeyPressed()){
+		  LEDPin1_ClrVal();
+	  }
+	  char temp[100];
+	  uint8_t hallo;
+	  CLS1_ReadChar(&hallo);
 	  WAIT1_Waitms(100);
-	  EVNT_HandleEvent((*APP_HandleEvent),1);
+	  //CLS1_SendCh();
+	  //CLS1_SendChar(hallo);
+	  CLS1_SendCh(hallo,CLS1_GetStdio()->stdOut);
+	   */
+
+
+	  //if(CLS1_ReadLine(temp,temp,100,CLS1_GetStdio())){
+	//	  CLS1_SendStr((uint8_t)temp,CLS1_GetStdio());
+	 // }
+	  APP_Start();
+
 	  //WAIT1_Waitms(100);
+	  //EVNT_HandleEvent((*APP_HandleEvent),1);
+	  //WAIT1_Waitms(100);
+
 
 /*
 	  int i[10];

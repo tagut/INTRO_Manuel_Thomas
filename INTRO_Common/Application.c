@@ -14,6 +14,9 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "KIN1.h"
+//Manuel
+#include "CLS1.h"
+
 #if PL_CONFIG_HAS_SHELL
   #include "CLS1.h"
 #endif
@@ -48,20 +51,45 @@ void APP_EventHandler(EVNT_Handle event) {
 #endif
     break;
   case EVNT_LED_HEARTBEAT:
-    LED1_Neg();
+    //LED1_Neg();
     break;
 
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-    LED2_Neg();
-    //CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    SHELL_SendString("SW1 pressed\r\n");
+    LED1_Neg();
+    CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+    //SHELL_SendString("SW1 pressed\r\n");
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
     #endif
     break;
   #endif
+  case EVNT_SW2_PRESSED:
+	  LED2_Neg();
+	  break;
+  case EVNT_SW3_PRESSED:
+	  LED3_Neg();
+	  break;
+  case EVNT_SW4_PRESSED:
+	  LED3_Neg();
+	  break;
+  case EVNT_SW5_PRESSED:
+	  LED3_Neg();
+	  break;
+  case EVNT_SW6_PRESSED:
+	  LED3_Neg();
+	  break;
+  case EVNT_SW7_PRESSED:
+	  LED3_Neg();
+	  break;
+  case EVNT_SW5_LONG_PRESSED:
+  	  LED2_Neg();
+  	  break;
+  case EVNT_SW6_LONG_PRESSED:
+  	  LED2_Neg();
+  	  break;
+
 #endif /* PL_CONFIG_HAS_KEYS */
 
     /* \todo extend handler as needed */
