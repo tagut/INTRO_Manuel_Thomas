@@ -57,11 +57,9 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-<<<<<<< HEAD
     LED1_Neg();
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     //SHELL_SendString("SW1 pressed\r\n");
-=======
     WAIT1_Waitms(50);
     if (KEY1_Get()){
     	int cnt = 0;
@@ -79,36 +77,51 @@ void APP_EventHandler(EVNT_Handle event) {
     	CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     	//SHELL_SendString("SW1 pressed\r\n");
     }
->>>>>>> f7bbac00e5b363c9fba74f8d9a3a065fbfe7ff33
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
     #endif
     break;
   #endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>1
   case EVNT_SW2_PRESSED:
 	  LED2_Neg();
 	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>2
   case EVNT_SW3_PRESSED:
 	  LED3_Neg();
 	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>3
   case EVNT_SW4_PRESSED:
 	  LED3_Neg();
 	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>4
   case EVNT_SW5_PRESSED:
 	  LED3_Neg();
 	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>5
   case EVNT_SW6_PRESSED:
 	  LED3_Neg();
 	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>6
   case EVNT_SW7_PRESSED:
 	  LED3_Neg();
 	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>4
   case EVNT_SW5_LONG_PRESSED:
   	  LED2_Neg();
   	  break;
+#endif
+#if PL_LOCAL_CONFIG_NOF_KEYS>5
   case EVNT_SW6_LONG_PRESSED:
   	  LED2_Neg();
   	  break;
+#endif
 
 #endif /* PL_CONFIG_HAS_KEYS */
 
