@@ -19,17 +19,11 @@
 #if PL_CONFIG_BOARD_IS_ROBO_V2
   #include "PORT_PDD.h"
 #endif
-<<<<<<< HEAD
-//                        #include "FreeRTOSConfig.h"
-#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
-  #include "SYS1.h"
-=======
 #if PL_CONFIG_HAS_RTOS
 	#include "FreeRTOSConfig.h"
 	#if configUSE_SEGGER_SYSTEM_VIEWER_HOOKS
   	  #include "SYS1.h"
 	#endif
->>>>>>> f7bbac00e5b363c9fba74f8d9a3a065fbfe7ff33
 #endif
 
 
@@ -40,41 +34,6 @@ void KEY_Scan(void) {
     }
   #endif
     /*! \todo check handling all keys */
-    int cnt;
-#if PL_LOCAL_CONFIG_BOARD_IS_FRDM //Buttons 5-6 with Pulling
-    if(KEY5_Get()){
-    	WAIT1_Waitms(50);
-    	if(KEY5_Get()){
-    		cnt = 0;
-    		while(KEY5_Get()){
-    			WAIT1_Waitms(1);
-    			cnt++;
-    		}
-    		if(cnt<=200){
-    			EVNT_SetEvent(EVNT_SW5_PRESSED);
-    		}else{
-    			EVNT_SetEvent(EVNT_SW5_LONG_PRESSED);
-    		}
-    	}
-    }
-    if(KEY6_Get()){
-    	WAIT1_Waitms(50);
-    	    	if(KEY6_Get()){
-    	    		cnt = 0;
-    	    		while(KEY6_Get()){
-    	    			WAIT1_Waitms(1);
-    	    			cnt++;
-    	    		}
-    	    		if(cnt<=200){
-    	    			EVNT_SetEvent(EVNT_SW6_PRESSED);
-    	    		}else{
-    	    			EVNT_SetEvent(EVNT_SW6_LONG_PRESSED);
-    	    		}
-    	    	}
-     }
-
-#endif
-
 }
 
 void KEY_EnableInterrupts(void) {
