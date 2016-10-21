@@ -51,7 +51,6 @@ void APP_EventHandler(EVNT_Handle event) {
     break;
   case EVNT_LED_HEARTBEAT:
     LED1_Neg();
-    CLS1_SendStr("Heartbeat\r\n", CLS1_GetStdio()->stdOut);
     break;
 
 #if PL_CONFIG_HAS_KEYS
@@ -64,24 +63,6 @@ void APP_EventHandler(EVNT_Handle event) {
 	LED1_Neg();
 >>>>>>> 578e03f1f3970b06bcfb84af0d42cc39cd0b4faa
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    SHELL_SendString("SW1 pressed\r\n");
-    WAIT1_Waitms(50);
-    if (KEY1_Get()){
-    	int cnt = 0;
-    	while(KEY1_Get()){
-    		WAIT1_Waitms(10);
-    		cnt++;
-    	}
-    	if(cnt<= 100){
-    		LED2_Off();
-
-    	} else {
-    		LED2_On();
-
-    	}
-    	//CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    	//SHELL_SendString("SW1 pressed\r\n");
-    }
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
 
@@ -93,31 +74,37 @@ void APP_EventHandler(EVNT_Handle event) {
   #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>1
   case EVNT_SW2_PRESSED:
+	  CLS1_SendStr("SW2 pressed\r\n", CLS1_GetStdio()->stdOut);
 	  LED2_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>2
   case EVNT_SW3_PRESSED:
+	  CLS1_SendStr("SW3 pressed\r\n", CLS1_GetStdio()->stdOut);
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>3
   case EVNT_SW4_PRESSED:
+	  CLS1_SendStr("SW4 pressed\r\n", CLS1_GetStdio()->stdOut);
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>4
   case EVNT_SW5_PRESSED:
+	  CLS1_SendStr("SW5 pressed\r\n", CLS1_GetStdio()->stdOut);
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>5
   case EVNT_SW6_PRESSED:
+	  CLS1_SendStr("SW6 pressed\r\n", CLS1_GetStdio()->stdOut);
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>6
   case EVNT_SW7_PRESSED:
+	  CLS1_SendStr("SW7 pressed\r\n", CLS1_GetStdio()->stdOut);
 	  LED3_Neg();
 	  break;
 #endif
@@ -192,13 +179,14 @@ void APP_Start(void) {
 #endif
   for(;;) {
 #if PL_CONFIG_HAS_KEYS
+
     KEY_Scan();
 #endif
 #if PL_CONFIG_HAS_EVENTS
     EVNT_HandleEvent(APP_EventHandler, TRUE);
 #endif
 
-    WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
+    //WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
   }
 #endif
 
