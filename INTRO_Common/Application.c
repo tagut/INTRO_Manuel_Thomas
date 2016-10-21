@@ -14,8 +14,7 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "KIN1.h"
-//Manuel
-#include "CLS1.h"
+
 
 #if PL_CONFIG_HAS_SHELL
   #include "CLS1.h"
@@ -51,7 +50,7 @@ void APP_EventHandler(EVNT_Handle event) {
 #endif
     break;
   case EVNT_LED_HEARTBEAT:
-    //LED1_Neg();
+    LED1_Neg();
     break;
 
 #if PL_CONFIG_HAS_KEYS
