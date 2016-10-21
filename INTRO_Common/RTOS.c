@@ -13,6 +13,29 @@
 #include "Keys.h"
 #include "Application.h"
 
+static void Task1(void* param){
+	(void)param;
+	for(;;){}
+
+}
+static void Task2(void* param){
+	(void)param;
+	for(;;){
+
+	#if PL_CONFIG_HAS_KEYS
+    	KEY_Scan();
+	#endif
+	#if PL_CONFIG_HAS_EVENTS
+    	EVNT_HandleEvent(APP_EventHandler, TRUE);
+	#endif
+    	FRTOS1_vTaskDelay(pdMS_TO_TICKS(50));
+
+		FRTOS1_vTaskDelay(pdMS_TO_TICKS(10));
+	}
+}
+
+
+
 static void AppTask(void* param) {
   const int *whichLED = (int*)param;
 
@@ -23,8 +46,12 @@ static void AppTask(void* param) {
     } else if (*whichLED==2) {
       LED2_Neg();
     }
+
+
+
+
     /* \todo handle your application code here */
-    //FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
+    FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
   }
 }
 
@@ -37,6 +64,13 @@ void RTOS_Init(void) {
   if (FRTOS1_xTaskCreate(AppTask, (signed portCHAR *)"App1", configMINIMAL_STACK_SIZE, (void*)&led1, tskIDLE_PRIORITY, NULL) != pdPASS) {
     for(;;){} /* error case only, stay here! */
   }
+
+  if (FRTOS1_xTaskCreate(Task1, (signed portCHAR *)"Task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+      for(;;){} /* error case only, stay here! */
+    }
+  if (FRTOS1_xTaskCreate(Task2, (signed portCHAR *)"Task2", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
+      for(;;){} /* error case only, stay here! */
+    }
 }
 
 void RTOS_Deinit(void) {

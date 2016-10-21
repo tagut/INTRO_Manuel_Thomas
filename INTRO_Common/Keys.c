@@ -29,11 +29,69 @@
 
 void KEY_Scan(void) {
   #if PL_CONFIG_NOF_KEYS >= 1 && !PL_CONFIG_KEY_1_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
     if (KEY1_Get()) { /* key pressed */
       EVNT_SetEvent(EVNT_SW1_PRESSED);
     }
   #endif
-    /*! \todo check handling all keys */
+#endif
+#if PL_CONFIG_NOF_KEYS >= 2 && !PL_CONFIG_KEY_2_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
+    if (KEY2_Get()) { /* key pressed */
+      EVNT_SetEvent(EVNT_SW2_PRESSED);
+    }
+  #endif
+#endif
+#if PL_CONFIG_NOF_KEYS >= 3 && !PL_CONFIG_KEY_3_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
+    if (KEY3_Get()) { /* key pressed */
+      EVNT_SetEvent(EVNT_SW3_PRESSED);
+    }
+  #endif
+#endif
+#if PL_CONFIG_NOF_KEYS >= 4 && !PL_CONFIG_KEY_4_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
+    if (KEY4_Get()) { /* key pressed */
+      EVNT_SetEvent(EVNT_SW4_PRESSED);
+    }
+  #endif
+#endif
+#if PL_CONFIG_NOF_KEYS >= 5 && !PL_CONFIG_KEY_5_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
+    if (KEY5_Get()) { /* key pressed */
+      EVNT_SetEvent(EVNT_SW5_PRESSED);
+    }
+  #endif
+#endif
+#if PL_CONFIG_NOF_KEYS >= 6 && !PL_CONFIG_KEY_6_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
+    if (KEY6_Get()) { /* key pressed */
+      EVNT_SetEvent(EVNT_SW6_PRESSED);
+    }
+  #endif
+#endif
+#if PL_CONFIG_NOF_KEYS >= 7 && !PL_CONFIG_KEY_7_ISR
+#if PL_CONFIG_HAS_DEBOUNCE
+  KEYDBNC_Process(); /* debounce key(s) */
+#else
+    if (KEY7_Get()) { /* key pressed */
+      EVNT_SetEvent(EVNT_SW7_PRESSED);
+    }
+  #endif
+ #endif
+    /*!  check handling all keys */
 }
 
 void KEY_EnableInterrupts(void) {

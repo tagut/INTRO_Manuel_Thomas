@@ -56,6 +56,7 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
+	  KEY_Scan();
     LED1_Neg();
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     //SHELL_SendString("SW1 pressed\r\n");
@@ -81,6 +82,9 @@ void APP_EventHandler(EVNT_Handle event) {
 
     #endif
     break;
+  case EVNT_SW1_LPRESSED:
+	  CLS1_SendStr("SW1 LOOOOOOOOOOONNNNNGGGGGGG pressed\r\n", CLS1_GetStdio()->stdOut);
+	  break;
   #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>1
   case EVNT_SW2_PRESSED:
@@ -111,16 +115,6 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_SW7_PRESSED:
 	  LED3_Neg();
 	  break;
-#endif
-#if PL_LOCAL_CONFIG_NOF_KEYS>4
-  case EVNT_SW5_LONG_PRESSED:
-  	  LED2_Neg();
-  	  break;
-#endif
-#if PL_LOCAL_CONFIG_NOF_KEYS>5
-  case EVNT_SW6_LONG_PRESSED:
-  	  LED2_Neg();
-  	  break;
 #endif
 
 #endif /* PL_CONFIG_HAS_KEYS */
@@ -185,7 +179,7 @@ void APP_Start(void) {
   //MANUELS PLAYGOUND
 #if PL_LOCAL_CONFIG_BOARD_IS_ROBO
 
-  (void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuel, NULL);
+  //(void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuel, NULL);
 
 
 
