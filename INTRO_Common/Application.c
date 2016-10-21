@@ -14,20 +14,6 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "KIN1.h"
-//Manuel
-#include "CLS1.h"
-#include "Trigger.h"
-
-//MANUEL
-void HalloManuel();
-void HalloManuell(){
-	LED2_Off();
-	(void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuel, NULL);
-}
-void HalloManuel(){
-	LED2_On();
-	(void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuell, NULL);
-}
 
 
 #if PL_CONFIG_HAS_SHELL
