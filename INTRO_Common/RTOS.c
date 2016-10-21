@@ -23,9 +23,28 @@ static void AppTask(void* param) {
     } else if (*whichLED==2) {
       LED2_Neg();
     }
+
+    for(;;) {
+    #if PL_CONFIG_HAS_KEYS
+
+        KEY_Scan();
+    #endif
+    #if PL_CONFIG_HAS_EVENTS
+        EVNT_HandleEvent(APP_EventHandler, TRUE);
+    #endif
+
+        //WAIT1_Waitms(25); /* just wait for some arbitrary time .... */
+    }
     /* \todo handle your application code here */
-    //FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
+    FRTOS1_vTaskDelay(pdMS_TO_TICKS(1000));
   }
+}
+
+static void task1(void* param){
+	(void)param; /* avoid compiler warning */
+	for(;;){
+		FRTOS1_vTaskDelay(pdMS_TO_TICKS(10));
+	}
 }
 
 void RTOS_Init(void) {
@@ -34,8 +53,14 @@ void RTOS_Init(void) {
 
   EVNT_SetEvent(EVNT_STARTUP); /* set startup event */
   /*! \todo Create tasks here */
+  if (FRTOS1_xTaskCreate(task1, (signed portCHAR *)"App2", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL) != pdPASS) {
+
+  	  for(;;){} /* error case only, stay here! */
+    }
+
   if (FRTOS1_xTaskCreate(AppTask, (signed portCHAR *)"App1", configMINIMAL_STACK_SIZE, (void*)&led1, tskIDLE_PRIORITY, NULL) != pdPASS) {
-    for(;;){} /* error case only, stay here! */
+
+	  for(;;){} /* error case only, stay here! */
   }
 }
 
