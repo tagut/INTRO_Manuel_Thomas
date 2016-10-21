@@ -14,6 +14,20 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "KIN1.h"
+//Manuel
+#include "CLS1.h"
+#include "Trigger.h"
+
+//MANUEL
+void HalloManuel();
+void HalloManuell(){
+	LED2_Off();
+	(void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuel, NULL);
+}
+void HalloManuel(){
+	LED2_On();
+	(void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuell, NULL);
+}
 
 
 #if PL_CONFIG_HAS_SHELL
@@ -50,7 +64,7 @@ void APP_EventHandler(EVNT_Handle event) {
 #endif
     break;
   case EVNT_LED_HEARTBEAT:
-    LED1_Neg();
+    //LED1_Neg();
     break;
 
 #if PL_CONFIG_HAS_KEYS
@@ -78,6 +92,7 @@ void APP_EventHandler(EVNT_Handle event) {
     }
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
+
     #endif
     break;
   #endif
@@ -181,6 +196,15 @@ void APP_Start(void) {
   vTaskStartScheduler(); /* start the RTOS, create the IDLE task and run my tasks (if any) */
   /* does usually not return! */
 #else
+  //MANUELS PLAYGOUND
+#if PL_LOCAL_CONFIG_BOARD_IS_ROBO
+
+  (void)TRG_SetTrigger(TRG_KEYPRESS, 1000/TRG_TICKS_MS, HalloManuel, NULL);
+
+
+
+
+#endif
   for(;;) {
 #if PL_CONFIG_HAS_KEYS
     KEY_Scan();
