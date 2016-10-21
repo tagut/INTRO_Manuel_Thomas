@@ -30,6 +30,9 @@ void TMR_OnInterrupt(void) {
 		EVNT_SetEvent(EVNT_LED_HEARTBEAT);
 		counter = 0;
 	}
+#if PL_CONFIC_HAS_TRIGGER
+		TRG_AddTick();
+#endif
 }
 
 void TMR_Init(void) {
