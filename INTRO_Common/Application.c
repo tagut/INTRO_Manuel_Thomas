@@ -50,16 +50,21 @@ void APP_EventHandler(EVNT_Handle event) {
 #endif
     break;
   case EVNT_LED_HEARTBEAT:
-    //LED1_Neg();
+    LED1_Neg();
+    CLS1_SendStr("Heartbeat\r\n", CLS1_GetStdio()->stdOut);
     break;
 
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
+<<<<<<< HEAD
 	  KEY_Scan();
     LED1_Neg();
+=======
+	LED1_Neg();
+>>>>>>> 578e03f1f3970b06bcfb84af0d42cc39cd0b4faa
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
-    //SHELL_SendString("SW1 pressed\r\n");
+    SHELL_SendString("SW1 pressed\r\n");
     WAIT1_Waitms(50);
     if (KEY1_Get()){
     	int cnt = 0;
@@ -74,7 +79,7 @@ void APP_EventHandler(EVNT_Handle event) {
     		LED2_On();
 
     	}
-    	CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
+    	//CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     	//SHELL_SendString("SW1 pressed\r\n");
     }
     #if PL_CONFIG_HAS_BUZZER
