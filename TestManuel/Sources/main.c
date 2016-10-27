@@ -74,21 +74,53 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
+  int jumper = 0;
+
+  //Batterie
+  	  int SOC = 5;
+
+  C12864_init(); //Display
+
   for(;;){
-	  C12864_init(); //Display
-	  WAIT1_Waitms(500);
-	  char halloWelt[] = {"HalloWelt"};
+	  char halloWelt[] = {"AMZ pilatus"};
+	  char zeit[] = {"1:50:23"};
+	  char runde[] = {"1:30:22"};
 	  FDisp1_PixelDim x = 5;
 	  FDisp1_PixelDim y = 5;
 
+	  GDisp1_Clear();
+
 	  FDisp1_WriteString(halloWelt,GDisp1_COLOR_PIXEL_SET,&x,&y,GFONT1_GetFont());
-	  C12864_UpdateFull();
+	  x = 5;
+	  y = 20;
+	  FDisp1_WriteString(zeit,GDisp1_COLOR_PIXEL_SET,&x,&y,GFONT1_GetFont());
+	  x = 5;
+	  y = 40;
+	  FDisp1_WriteString(runde,GDisp1_COLOR_PIXEL_SET,&x,&y,GFONT1_GetFont());
 	  //GFONT_Callbacks gibt einen Poiter zurück
 
-	  WAIT1_Waitms(2000); //2s
 
-	  GDisp1_DrawFilledBox(30,30,30,30,GDisp1_COLOR_PIXEL_SET);
+
+	  GDisp1_DrawBox(90,5,20,48,1,1);
+	  for(int i = 0;i<SOC;i++){
+	  	GDisp1_DrawFilledBox(92,43-(i*9),16,8,1);//Balken ganz unten
+	  }
+	  if(SOC == 0){
+		  SOC = 5+1;
+	  }
+	  SOC--;
+
+	  WAIT1_Waitms(500); //2s
+
+	  //jumper ++;
+	  //GDisp1_DrawFilledBox(30,jumper,30,30,GDisp1_COLOR_PIXEL_SET);
 	  C12864_UpdateFull();
+
+	  if(jumper == 64){
+		  jumper = 0;
+	  }
+
+	  //WAIT1_Waitms(100); //2s
 
 	  //WAIT1_Waitms(10000); //10s
   }

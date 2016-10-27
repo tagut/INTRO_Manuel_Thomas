@@ -18,14 +18,8 @@ void C12864_UpdateRegion(C12864_PixelDim x,C12864_PixelDim y,C12864_PixelDim w,C
 }
 
 void C12864_UpdateFull(){
-	//insData_ClrVal(); //Send Controll Bytes
-	//SM1_SendChar(0xB1); //Page set Adress 0
-	//SM1_SendChar(0x10); // High bits Column
-	//SM1_SendChar(0x00); //Low Bits --> Adress 0
-	//SM1_SendChar(0xE0); //Read/Modify/Write
-	insData_ClrVal(); //Send Controll Bytes
 	for (int j = 0; j < (C12864_DISPLAY_HW_NOF_ROWS / 8); j++) { //Page manuell increase
-		SM1_SendChar(0xB0 + j); //Page set Adress
+		SM1_SendChar(0xB0 + j);
 		SM1_SendChar(0x10); // High bits Column
 		SM1_SendChar(0x00); //Low Bits --> Adress 0
 		SM1_SendChar(0xE0); //Read/Modify/Write
@@ -36,9 +30,6 @@ void C12864_UpdateFull(){
 		insData_ClrVal();//Send Controll Bytes
 		SM1_SendChar(0xEE);		//END Write
 	}
-	//SM1_SendChar(0xAE);		//Display OFF
-	//SM1_SendChar(0xAF);		//Display ON
-
 }
 
 
@@ -47,7 +38,7 @@ WAIT1_Waitms(100);
 insData_ClrVal();
 SM1_SendChar(0xA0);		//Display Normal
 SM1_SendChar(0xAE);		//Display OFF
-SM1_SendChar(0xC0);		//Common output mode select
+SM1_SendChar(0xC8);		//Common output mode select  OLD C0
 SM1_SendChar(0xA2);		//LCD Bias Voltage Ratio 1/9 Richtig ???
 SM1_SendChar(0x2F);		//Select internal power supply operation Mode ??
 SM1_SendChar(0x26);		//Select internal resistor ratio (Rb/Ra) mode
