@@ -21,7 +21,7 @@ static void Task1(void* param){
 	}
 
 }
-static void Task2(void* param){
+static void MainTask(void* param){
 	(void)param;
 	for(;;){
 
@@ -62,10 +62,11 @@ void RTOS_Init(void) {
     for(;;){} /* error case only, stay here! */
   }
 
+  if (FRTOS1_xTaskCreate(MainTask, (signed portCHAR *)"MainShit", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+        for(;;){} /* error case only, stay here! */
+      }
+
   if (FRTOS1_xTaskCreate(Task1, (signed portCHAR *)"Task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
-      for(;;){} /* error case only, stay here! */
-    }
-  if (FRTOS1_xTaskCreate(Task2, (signed portCHAR *)"Task2", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
       for(;;){} /* error case only, stay here! */
     }
 }
