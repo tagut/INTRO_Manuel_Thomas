@@ -56,12 +56,9 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-
 	  KEY_Scan();
     LED1_Neg();
-
 	LED1_Neg();
-
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
