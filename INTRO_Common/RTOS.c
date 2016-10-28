@@ -15,7 +15,10 @@
 
 static void Task1(void* param){
 	(void)param;
-	for(;;){}
+	for(;;){
+
+		FRTOS1_vTaskDelay(pdMS_TO_TICKS(100));
+	}
 
 }
 static void Task2(void* param){
@@ -29,8 +32,6 @@ static void Task2(void* param){
     	EVNT_HandleEvent(APP_EventHandler, TRUE);
 	#endif
     	FRTOS1_vTaskDelay(pdMS_TO_TICKS(50));
-
-		FRTOS1_vTaskDelay(pdMS_TO_TICKS(10));
 	}
 }
 
@@ -46,10 +47,6 @@ static void AppTask(void* param) {
     } else if (*whichLED==2) {
       LED2_Neg();
     }
-
-
-
-
     /* \todo handle your application code here */
     FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
   }

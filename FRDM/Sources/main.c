@@ -62,6 +62,8 @@
 #include "AS1.h"
 #include "ASerialLdd1.h"
 #include "CLS1.h"
+#include "RTT1.h"
+#include "SYS1.h"
 #include "FRTOS1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
