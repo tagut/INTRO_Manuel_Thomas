@@ -66,42 +66,42 @@ void APP_EventHandler(EVNT_Handle event) {
     #endif
     break;
   case EVNT_SW1_LPRESSED:
-	  CLS1_SendStr("SW1 LOOOOOOOOOOONNNNNGGGGGGG pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW1 LOOOOOOOOOOONNNNNGGGGGGG pressed\r\n");
 	  break;
   #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>1
   case EVNT_SW2_PRESSED:
-	  CLS1_SendStr("SW2 pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW2 pressed\r\n");
 	  LED2_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>2
   case EVNT_SW3_PRESSED:
-	  CLS1_SendStr("SW3 pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW3 pressed\r\n");
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>3
   case EVNT_SW4_PRESSED:
-	  CLS1_SendStr("SW4 pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW4 pressed\r\n");
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>4
   case EVNT_SW5_PRESSED:
-	  CLS1_SendStr("SW5 pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW5 pressed\r\n");
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>5
   case EVNT_SW6_PRESSED:
-	  CLS1_SendStr("SW6 pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW6 pressed\r\n");
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>6
   case EVNT_SW7_PRESSED:
-	  CLS1_SendStr("SW7 pressed\r\n", CLS1_GetStdio()->stdOut);
+	  SHELL_SendString("SW7 pressed\r\n");
 	  LED3_Neg();
 	  break;
 #endif

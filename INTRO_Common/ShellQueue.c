@@ -26,7 +26,7 @@ void SQUEUE_SendString(const unsigned char *str) {
 #if PL_CONFIG_SQUEUE_SINGLE_CHAR
   while(*str!='\0') {
     if (FRTOS1_xQueueSendToBack(SQUEUE_Queue, str, 100/portTICK_PERIOD_MS)!=pdPASS) {
-      /*for(;;){}*/ /* ups? */ /* loosing character */
+      //for(;;){} /* ups? */ /* loosing character */
     }
     str++;
   }

@@ -9,7 +9,9 @@
 #include "Platform.h"
 #if PL_CONFIG_HAS_SHELL
 #include "Shell.h"
+#include "ShellQueue.h"
 #include "CLS1.h"
+#include "USB1.h" //MANUEL
 #include "Application.h"
 #if PL_CONFIG_HAS_RTOS
 	#include "FRTOS1.h"
@@ -146,6 +148,76 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
   NULL /* Sentinel */
 };
 
+
+//MANUEL
+#if PL_CONFIG_HAS_USB_CDC
+bool USBorCLS1 = FALSE;
+void CLS1_AND_USB_ReadChar(uint8_t *c);
+void CLS1_AND_USB_SendChar(uint8_t ch);
+bool CLS1_AND_USB_KeyPressed(void);
+
+void CLS1_AND_USB_ReadChar(uint8_t *c)
+{
+	if(USBorCLS1){
+		CLS1_ReadChar(c);
+	}
+	else{
+		uint8_t res;
+
+		  res = USB1_RecvChar((uint8_t*)c);
+		  if (res==ERR_RXEMPTY) {
+		    // no character in buffer
+		    *c = '\0';
+		  }
+	}
+}
+
+
+void CLS1_AND_USB_SendChar(uint8_t ch)
+{
+	CLS1_SendChar(ch);
+  uint8_t res;
+  int timeoutMs = 20;
+  do {
+    res = USB1_SendChar((uint8_t)ch);  /* Send char */
+    if (res==ERR_TXFULL) {
+      WAIT1_WaitOSms(10);
+    }
+    if(timeoutMs<=0) {
+      break; /* timeout */
+    }
+    timeoutMs -= 10;
+  } while(res==ERR_TXFULL);
+}
+
+bool CLS1_AND_USB_KeyPressed(void)
+{
+  bool res;
+  res = CLS1_KeyPressed();
+  if(res){
+	  USBorCLS1 = TRUE;
+	  return res;
+  }
+  res = (bool)((USB1_GetCharsInRxBuf()==0U) ? FALSE : TRUE); // true if there are characters in receive buffer
+    if(res){
+  	  USBorCLS1 = FALSE;
+  	  return res;
+    }
+  return res;
+}
+
+CLS1_ConstStdIOType CLS1_AND_USB_stdio =
+{
+  (CLS1_StdIO_In_FctType)CLS1_AND_USB_ReadChar, /* stdin */
+  (CLS1_StdIO_OutErr_FctType)CLS1_AND_USB_SendChar,/* stdout */
+  (CLS1_StdIO_OutErr_FctType)CLS1_AND_USB_SendChar,/* stderr */
+  CLS1_AND_USB_KeyPressed /* if input is not empty */
+};
+
+static CLS1_ConstStdIOType *CLS1_currStdIOHallo = &CLS1_AND_USB_stdio;
+#endif
+
+
 static uint32_t SHELL_val; /* used as demo value for shell */
 
 void SHELL_SendString(unsigned char *msg) {
@@ -219,6 +291,8 @@ void SHELL_ParseCmd(unsigned char *cmd) {
 	#if CLS1_DEFAULT_SERIAL
 	  static unsigned char localConsole_buf[DEFAULT_BUF_SIZE];
 	#endif
+
+
 	#if PL_CONFIG_HAS_BLUETOOTH
 	  static unsigned char bluetooth_buf[DEFAULT_BUF_SIZE];
 	#endif
@@ -267,7 +341,13 @@ void SHELL_ParseCmd(unsigned char *cmd) {
 	#if PL_CONFIG_HAS_SHELL_QUEUE
 	#if PL_CONFIG_SQUEUE_SINGLE_CHAR
 		{
-			/*! \todo Handle shell queue */
+			/*! \todo Handle shell queue */ //MANUEL
+			unsigned char ch = SQUEUE_ReceiveChar();
+			while(ch !='\0'){
+				CLS1_SendCh(ch,CLS1_GetStdio()->stdOut);
+				ch = SQUEUE_ReceiveChar();
+			}
+
 		}
 	#else /* PL_CONFIG_SQUEUE_SINGLE_CHAR */
 		{
@@ -289,6 +369,10 @@ void SHELL_ParseCmd(unsigned char *cmd) {
 
 void SHELL_Init(void) {
   SHELL_val = 0;
+#if PL_CONFIG_HAS_USB_CDC //MANUEL
+  (void)CLS1_SetStdio(CLS1_currStdIOHallo);
+#endif
+
 #if !CLS1_DEFAULT_SERIAL && PL_CONFIG_CONFIG_HAS_BLUETOOTH
   (void)CLS1_SetStdio(&BT_stdio); /* use the Bluetooth stdio as default */
 #endif

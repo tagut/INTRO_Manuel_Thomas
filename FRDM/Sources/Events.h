@@ -68,6 +68,12 @@
 #include "RTT1.h"
 #include "SYS1.h"
 #include "FRTOS1.h"
+#include "TMOUT1.h"
+#include "USB1.h"
+#include "CDC1.h"
+#include "Tx1.h"
+#include "Rx1.h"
+#include "USB0.h"
 
 #ifdef __cplusplus
 extern "C" {
