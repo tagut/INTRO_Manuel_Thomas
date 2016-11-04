@@ -49,6 +49,8 @@ static void AppTask(void* param) {
     }
     /* \todo handle your application code here */
     FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
+
+    //CLS1_SendStr("Led toggled\r\n", CLS1_GetStdio()->stdOut);
   }
 }
 
