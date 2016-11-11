@@ -13,28 +13,30 @@
 #include "Keys.h"
 #include "Application.h"
 
+SemaphoreHandle_t keyMasterSlave;
 
+
+static void masterTask(void* param){
+	(void)param;
+	for(;;){
+	FRTOS1_vTaskDelay(10);
+	FRTOS1_xSemaphoreGive(keyMasterSlave);
+	}
+}
+
+static void slaveTask(void* param){
+	(void)param;
+	for(;;){
+	FRTOS1_xSemaphoreTake(keyMasterSlave, portMAX_DELAY);
+	LED2_Neg();
+	}
+}
 
 static void Task1(void* param){
 	(void)param;
-	ledSem = FRTOS1_xSemaphoreCreateBinary();
-	vQueueAddToRegistry(ledSem, "LED Semaphore");
 	for(;;){
-		if(ledSem != NULL){
-		if(FRTOS1_xSemaphoreTake(ledSem,100)){
-			LED1_On();
-		}else{
-			LED2_On();
-			FRTOS1_vTaskDelay(pdMS_TO_TICKS(5000));
-		}
 
-		}else{
-			for(;;){}//UPS
-		}
-
-		FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
-		LED1_Off();
-		LED2_Off();
+		FRTOS1_vTaskDelay(pdMS_TO_TICKS(100));
 	}
 
 }
@@ -60,9 +62,9 @@ static void AppTask(void* param) {
   (void)param; /* avoid compiler warning */
   for(;;) {
     if (*whichLED==1) {
-      //LED1_Neg();
+      LED1_Neg();
     } else if (*whichLED==2) {
-      //LED2_Neg();
+      LED2_Neg();
     }
     /* \todo handle your application code here */
     FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
@@ -88,6 +90,15 @@ void RTOS_Init(void) {
   if (FRTOS1_xTaskCreate(Task1, (signed portCHAR *)"Task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
       for(;;){} /* error case only, stay here! */
     }
+  	  keyMasterSlave = FRTOS1_xSemaphoreCreateBinary();
+  	  FRTOS1_vQueueAddToRegistry(keyMasterSlave, "LedSemaphore");
+
+  if (FRTOS1_xTaskCreate(masterTask, (signed portCHAR *)"masterTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+        for(;;){} /* error case only, stay here! */
+      }
+  if (FRTOS1_xTaskCreate(slaveTask, (signed portCHAR *)"slaveTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+        for(;;){} /* error case only, stay here! */
+      }
 }
 
 void RTOS_Deinit(void) {
