@@ -150,23 +150,33 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
     raw[i] = MAX_SENSOR_VALUE;
   }
   WAIT1_Waitus(50); /* give at least 10 us to charge the capacitor */
+  CS1_CriticalVariable();
+  CS1_EnterCritical();
+
   for(i=0;i<REF_NOF_SENSORS;i++) {
     SensorFctArray[i].SetInput(); /* turn I/O line as input */
   }
   (void)RefCnt_ResetCounter(timerHandle); /* reset timer counter */
   do {
-    timerVal = RefCnt_GetCounterValue(timerHandle);
+	timerVal = RefCnt_GetCounterValue(timerHandle);
     cnt = 0;
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
-        if (SensorFctArray[i].GetVal()==0) {
+        if (SensorFctArray[i].GetVal()==0) { //Overflow
           raw[i] = timerVal;
         }
       } else { /* have value */
         cnt++;
       }
     }
-  } while(cnt!=REF_NOF_SENSORS);
+  } while(cnt!=REF_NOF_SENSORS && timerVal < 0xE000);
+  CS1_ExitCritical();
+  for(i=0;i<REF_NOF_SENSORS;i++) {
+        if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
+            raw[i] = 0xE000;
+      }
+  }
+
   LED_IR_Off(); /* IR LED's off */
 }
 
@@ -574,7 +584,7 @@ static void ReflTask (void *pvParameters) {
   (void)pvParameters; /* not used */
   for(;;) {
     REF_StateMachine();
-    FRTOS1_vTaskDelay(10/portTICK_PERIOD_MS);
+    FRTOS1_vTaskDelay(50/portTICK_PERIOD_MS); // old 10
   }
 }
 
