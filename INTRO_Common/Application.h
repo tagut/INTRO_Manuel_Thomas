@@ -14,6 +14,9 @@
 #if PL_CONFIG_HAS_EVENTS
 #include "Event.h"
 
+#include "FRTOS1.h"
+extern SemaphoreHandle_t ledSem;//MANUEL
+
 void APP_EventHandler(EVNT_Handle event);
 #endif
 

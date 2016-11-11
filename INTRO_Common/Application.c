@@ -16,6 +16,9 @@
 #include "KIN1.h"
 
 
+SemaphoreHandle_t ledSem;//MANUEL
+
+
 #if PL_CONFIG_HAS_SHELL
   #include "CLS1.h"
 #endif
@@ -44,21 +47,27 @@
 void APP_EventHandler(EVNT_Handle event) {
   switch(event) {
   case EVNT_STARTUP:
-    LED1_On(); /* just do something */
+    //LED1_On(); /* just do something */
 #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_WELCOME);
 #endif
     break;
   case EVNT_LED_HEARTBEAT:
-    LED1_Neg();
+    //LED1_Neg();
     break;
 
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-	  KEY_Scan();
-    LED1_Neg();
-	LED1_Neg();
+	  //KEY_Scan();
+    //LED1_Neg();
+	//LED1_Neg();
+	  if(ledSem != NULL){
+	  		FRTOS1_xSemaphoreGive(ledSem);
+	  		}else{
+	  			for(;;){}//UPS
+	  		}
+
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);

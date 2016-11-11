@@ -13,11 +13,28 @@
 #include "Keys.h"
 #include "Application.h"
 
+
+
 static void Task1(void* param){
 	(void)param;
+	ledSem = FRTOS1_xSemaphoreCreateBinary();
+	vQueueAddToRegistry(ledSem, "LED Semaphore");
 	for(;;){
+		if(ledSem != NULL){
+		if(FRTOS1_xSemaphoreTake(ledSem,100)){
+			LED1_On();
+		}else{
+			LED2_On();
+			FRTOS1_vTaskDelay(pdMS_TO_TICKS(5000));
+		}
 
-		FRTOS1_vTaskDelay(pdMS_TO_TICKS(100));
+		}else{
+			for(;;){}//UPS
+		}
+
+		FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
+		LED1_Off();
+		LED2_Off();
 	}
 
 }
@@ -43,9 +60,9 @@ static void AppTask(void* param) {
   (void)param; /* avoid compiler warning */
   for(;;) {
     if (*whichLED==1) {
-      LED1_Neg();
+      //LED1_Neg();
     } else if (*whichLED==2) {
-      LED2_Neg();
+      //LED2_Neg();
     }
     /* \todo handle your application code here */
     FRTOS1_vTaskDelay(pdMS_TO_TICKS(500));
