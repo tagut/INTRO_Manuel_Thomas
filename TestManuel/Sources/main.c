@@ -54,6 +54,11 @@
 #include "BitIoLdd7.h"
 #include "Output1.h"
 #include "BitIoLdd8.h"
+#include "UTIL1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "CLS1.h"
+#include "CS2.h"
 #include "GFONT1.h"
 #include "FDisp1.h"
 /* Including shared modules, which are used for whole project */
@@ -74,7 +79,49 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
+  //CLS1_SendStr("HALLO MANUEL",CLS1_GetStdio()->stdOut);
+
+  //Uart LOOP Back for Testing TMP....
+  static uint8_t BUF[15000];
+  for(int i = 0;i<15000;i++){
+	  BUF[i] = 'A';
+  }
+  int send = 0;
+  uint8_t *bufer = BUF;
+  int recive = 0;
+  for(send = 0;send<15000;send++){
+
+	  //while(!AS1_GetCharsInRxBuf()){}
+	//while(!CLS1_KeyPressed()){}
+	  CLS1_ReadChar(BUF+send);
+	while('\0' == *(BUF+send)){
+		CLS1_ReadChar(BUF+send);
+	}
+		  //AS1_RecvChar(BUF+send);
+	  /*size_t hallo = 5;
+	  uint8_t buffer = 0;
+	  CLS1_ReadLine(buffer,buffer,5,&CLS1_GetStdio()->stdOut);
+	  while(!(CLS1_ReadLine(bufer,bufer,hallo,(CLS1_GetStdio()->stdIn)))){}
+	  bufer += 4;
+	  */
+	  if(send == (15000-1)){
+		  WAIT1_Waitms(5000);
+
+		  for(recive = 0;recive < 15000;recive++){
+			  //AS1_SendChar(BUF[recive]);
+			  CLS1_SendChar(BUF[recive]);
+			  WAIT1_Waitms(1);
+			  send = 0;
+			  CLS1_ReadChar(BUF+send); //CLEAR BUFFER
+
+		  }
+	  }
+
+  }
+/*
   int jumper = 0;
+
+
 
   //Batterie
   	  int SOC = 5;
@@ -124,6 +171,7 @@ int main(void)
 
 	  //WAIT1_Waitms(10000); //10s
   }
+  */
 
   /* For example: for(;;) { } */
 
