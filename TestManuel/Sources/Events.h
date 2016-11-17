@@ -56,6 +56,11 @@
 #include "BitIoLdd7.h"
 #include "Output1.h"
 #include "BitIoLdd8.h"
+#include "UTIL1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "CLS1.h"
+#include "CS2.h"
 #include "GFONT1.h"
 #include "FDisp1.h"
 
