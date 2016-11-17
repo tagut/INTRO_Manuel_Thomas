@@ -71,7 +71,6 @@ void APP_EventHandler(EVNT_Handle event) {
     CLS1_SendStr("SW1 pressed\r\n", CLS1_GetStdio()->stdOut);
     #if PL_CONFIG_HAS_BUZZER
     BUZ_PlayTune(BUZ_TUNE_BUTTON);
-
     #endif
     break;
   case EVNT_SW1_LPRESSED:

@@ -12,7 +12,11 @@
 #include "Platform.h"
 #if PL_CONFIG_HAS_TIMER
 
+#if PL_LOCAL_CONFIG_BOARD_IS_ROBO
+#define TMR_TICK_MS  1
+#else
 #define TMR_TICK_MS  10
+#endif
   /*!< we get called every TMR_TICK_MS ms */
 
 /*! \brief Function called from timer interrupt every TMR_TICK_MS. */
