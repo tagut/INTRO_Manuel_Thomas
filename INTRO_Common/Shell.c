@@ -370,7 +370,7 @@ void SHELL_ParseCmd(unsigned char *cmd) {
 void SHELL_Init(void) {
   SHELL_val = 0;
 #if PL_CONFIG_HAS_USB_CDC //MANUEL
-  (void)CLS1_SetStdio(CLS1_currStdIOHallo);
+  //(void)CLS1_SetStdio(CLS1_currStdIOHallo);
 #endif
 
 #if !CLS1_DEFAULT_SERIAL && PL_CONFIG_CONFIG_HAS_BLUETOOTH
