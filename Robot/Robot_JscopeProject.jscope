@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options IsRTTSession="0" IsRTTWithTimeStamp="1" SamplingPeriod="100" Connection="1" SerialNo="0" IP="" TargetDevice="MK22FX512xxx12 (allow security)" TargetInterface="SWD" InterfaceSpeed="4000" />
+            </JLink>
+            <ElfFile Name="D:\Dokumente\Hochschule\HS16\INTRO\Privat\Our Project\Robot\Debug\Robot.elf" />
+            <DataFile Name="" />
+            <RawFile Name="" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="TACHO_currLeftSpeed" Address="0x1FFF8348" Type="long" TypeID="12" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="0" YMaxSampled="0" YAvgSampled="0" Offset="469762076" ShowInGraph="1" YOffset="200" IsAutoConfig="1" YResolution="1" MaxValue="1" File="D:/Dokumente/Hochschule/HS16/INTRO/Privat/Our Project/INTRO_Common/Tacho.c" Scope="1" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="TACHO_currRightSpeed" Address="0x1FFF834C" Type="long" TypeID="12" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="0" YMaxSampled="0" YAvgSampled="0" Offset="469762076" ShowInGraph="1" YOffset="200" IsAutoConfig="1" YResolution="1" MaxValue="1" File="D:/Dokumente/Hochschule/HS16/INTRO/Privat/Our Project/INTRO_Common/Tacho.c" Scope="1" DrawStyle="0" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>
