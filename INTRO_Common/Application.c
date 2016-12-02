@@ -59,10 +59,15 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('A'); //MANUEL THOMAS
+#endif
 	  //KEY_Scan();
     //LED1_Neg();
 	//LED1_Neg();
+#if PL_LOCAL_CONFIG_BOARD_IS_ROBO
 	  LF_StartFollowing(); //LINE Following MANuel & Thomas
+#endif
 	  /*if(ledSem != NULL){
 	  		FRTOS1_xSemaphoreGive(ledSem);
 	  		}else{
@@ -81,36 +86,55 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_LOCAL_CONFIG_NOF_KEYS>1
   case EVNT_SW2_PRESSED:
 	  SHELL_SendString("SW2 pressed\r\n");
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('B'); //MANUEL THOMAS
+#endif
 	  LED2_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>2
   case EVNT_SW3_PRESSED:
 	  SHELL_SendString("SW3 pressed\r\n");
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('C'); //MANUEL THOMAS
+#endif
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>3
   case EVNT_SW4_PRESSED:
 	  SHELL_SendString("SW4 pressed\r\n");
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('D'); //MANUEL THOMAS
+#endif
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>4
   case EVNT_SW5_PRESSED:
 	  SHELL_SendString("SW5 pressed\r\n");
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('E'); //MANUEL THOMAS
+#endif
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>5
   case EVNT_SW6_PRESSED:
 	  SHELL_SendString("SW6 pressed\r\n");
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('F'); //MANUEL THOMAS
+#endif
 	  LED3_Neg();
 	  break;
 #endif
 #if PL_LOCAL_CONFIG_NOF_KEYS>6
   case EVNT_SW7_PRESSED:
 	  SHELL_SendString("SW7 pressed\r\n");
+#if PL_CONFIG_CONTROL_SENDER
+	  Button_Pressed('G'); //MANUEL THOMAS
+#endif
+
 	  LED3_Neg();
 	  break;
 #endif

@@ -39,11 +39,15 @@
 static bool REMOTE_isOn = FALSE;
 static bool REMOTE_isVerbose = FALSE;
 static bool REMOTE_useJoystick = TRUE;
+
+static uint16 IncSpeed = 25; //THOMAS
+
 #if PL_CONFIG_HAS_JOYSTICK
 static uint16_t midPointX, midPointY;
 #endif
 
 #if PL_CONFIG_CONTROL_SENDER
+#if PL_CONFIG_HAS_JOYSTICK
 static int8_t ToSigned8Bit(uint16_t val, bool isX) {
   int32_t tmp;
 
@@ -92,6 +96,31 @@ static uint8_t REMOTE_GetXY(uint16_t *x, uint16_t *y, int8_t *x8, int8_t *y8) {
     *y8 = ToSigned8Bit(values[1], FALSE);
   }
   return ERR_OK;
+}
+#endif
+//Manuel Thomas
+void Button_Pressed(char button){
+#if PL_CONFIG_CONTROL_SENDER
+      if (REMOTE_useJoystick) {
+        uint8_t buf[1];
+        buf[0] = (uint8_t)button;
+
+        if (REMOTE_isVerbose) {
+          uint8_t txtBuf[48];
+          txtBuf[0] = button;
+          UTIL1_strcpy(txtBuf+1, sizeof(txtBuf), (unsigned char*)" TX: Button: ");
+    #if RNWK_SHORT_ADDR_SIZE==1
+          UTIL1_strcatNum8Hex(txtBuf, sizeof(txtBuf), RNETA_GetDestAddr());
+    #else
+          UTIL1_strcatNum16Hex(txtBuf, sizeof(txtBuf), RNETA_GetDestAddr());
+    #endif
+          UTIL1_strcat(txtBuf, sizeof(txtBuf), (unsigned char*)"\r\n");
+          SHELL_SendString(txtBuf);
+        }
+        (void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_BTN, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+        LED1_Neg();
+      }
+#endif
 }
 
 static void RemoteTask (void *pvParameters) {
@@ -212,14 +241,14 @@ static int16_t scaleJoystickTo1K(int8_t val) {
   int tmp;
 
   if (val>0) {
-    tmp = ((val*10)/127)*100;
+    tmp = ((val*10)/127)*(IncSpeed*4);
   } else {
-    tmp = ((val*10)/128)*100;
+    tmp = ((val*10)/128)*(IncSpeed*4);
   }
-  if (tmp<-1000) {
-    tmp = -1000;
-  } else if (tmp>1000) {
-    tmp = 1000;
+  if (tmp< -(IncSpeed*40)) {
+    tmp = -(IncSpeed*40);
+  } else if (tmp>(IncSpeed*40)) {
+    tmp = (IncSpeed*40);
   }
   return tmp;
 }
@@ -287,13 +316,25 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
       } else if (val=='G') { /* center joystick button: enable remote */
         SHELL_ParseCmd((unsigned char*)"buzzer buz 300 1000");
         REMOTE_SetOnOff(TRUE);
+        IncSpeed = 25;
         DRV_SetMode(DRV_MODE_SPEED);
         SHELL_SendString("Remote ON\r\n");
-      } else if (val=='C') { /* red 'C' button */
-        /*! \todo add functionality */
-      } else if (val=='A') { /* green 'A' button */
-        /*! \todo add functionality */
+      } else if (val=='A') { /* red 'C' button */
+    	  LF_StartFollowing(); //LINE Following MANuel & Thomas
+      } else if (val=='B') { /* green 'A' button */
+    	  if(IncSpeed < 300){
+    	      IncSpeed += 4;
+    	   }
+      } else if (val=='C') { /* green 'A' button */
+          /*! \todo add functionality */
+      }else if (val=='D') { /* green 'A' button */
+    	  if(IncSpeed > 10){
+    		  IncSpeed -= 4;
+    	  }
+      }else if (val=='E') { /* green 'A' button */
+          /*! \todo add functionality */
       }
+
 #else
       *handled = FALSE; /* no shell and no buzzer? */
 #endif
