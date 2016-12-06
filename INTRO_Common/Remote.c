@@ -139,7 +139,7 @@ static void RemoteTask (void *pvParameters) {
 
         /* send periodically messages */
         REMOTE_GetXY(&x, &y, &x8, &y8);
-        buf[0] = x8;
+        buf[0] = x8 * 0.5;
         buf[1] = y8;
         if (REMOTE_isVerbose) {
           uint8_t txtBuf[48];
@@ -161,7 +161,7 @@ static void RemoteTask (void *pvParameters) {
         LED1_Neg();
       }
 #endif
-      FRTOS1_vTaskDelay(200/portTICK_PERIOD_MS);
+      FRTOS1_vTaskDelay(150/portTICK_PERIOD_MS); 		// old 200 Manuel Thomas
     } else {
       FRTOS1_vTaskDelay(1000/portTICK_PERIOD_MS);
     }
