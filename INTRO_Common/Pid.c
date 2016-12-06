@@ -14,20 +14,30 @@
 #endif
 #include "Reflectance.h"
 
-typedef struct {
-  int32_t pFactor100;
-  int32_t iFactor100;
-  int32_t dFactor100;
-  uint8_t maxSpeedPercent; /* limitation of PID value */
-  int32_t iAntiWindup;
-  int32_t lastError;
-  int32_t integral;
-} PID_Config;
+
 
 /*! \todo Add your own additional configurations as needed, at least with a position config */
 static PID_Config lineFwConfig;
 static PID_Config speedLeftConfig, speedRightConfig;
 static PID_Config posLeftConfig, posRightConfig;
+
+PID_Config* getConfigPointer(PID_Kind kind){
+	if(kind == speed_R){
+		return &speedRightConfig;
+	}
+	if(kind == speed_L){
+		return &speedLeftConfig;
+	}
+	if(kind == pos_R){
+		return &posRightConfig;
+	}
+	if(kind == pos_L){
+		return &posLeftConfig;
+	}
+	if(kind == line){
+		return &lineFwConfig;
+	}
+}
 
 static int32_t PID(int32_t currVal, int32_t setVal, PID_Config *config) {
   int32_t error;

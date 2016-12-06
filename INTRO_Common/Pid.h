@@ -12,6 +12,24 @@
 
 #if PL_CONFIG_HAS_SHELL
 #include "CLS1.h"
+
+typedef struct {
+  int32_t pFactor100;
+  int32_t iFactor100;
+  int32_t dFactor100;
+  uint8_t maxSpeedPercent; /* limitation of PID value */
+  int32_t iAntiWindup;
+  int32_t lastError;
+  int32_t integral;
+} PID_Config;
+
+typedef enum {
+	speed_R,speed_L,line,pos_R,pos_L
+} PID_Kind;
+
+PID_Config* getConfigPointer(PID_Kind kind);
+
+
 /*!
  * \brief Shell command line parser.
  * \param[in] cmd Pointer to command string

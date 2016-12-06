@@ -18,6 +18,7 @@
 #endif
 #if PL_CONFIG_HAS_MOTOR
   #include "Motor.h"
+ #include "Turn.h"
 #endif
 #if PL_CONFIG_HAS_RADIO
   #include "RNet_App.h"
@@ -236,21 +237,35 @@ static void REMOTE_HandleMotorMsg(int16_t speedVal, int16_t directionVal, int16_
 #endif
 
 #if PL_CONFIG_HAS_MOTOR
-static int16_t scaleJoystickTo1K(int8_t val) {
+static int16_t scaleJoystickTo1K(int8_t val,bool speed) {
   /* map speed from -128...127 to -1000...+1000 */
   int tmp;
+  if(speed){
+	  if (val>0) {
+		tmp = ((val*10)/127)*(IncSpeed*4);
+	  } else {
+		tmp = ((val*10)/128)*(IncSpeed*4);
+	  }
+	  if (tmp< -(IncSpeed*40)) {
+		tmp = -(IncSpeed*40);
+	  } else if (tmp>(IncSpeed*40)) {
+		tmp = (IncSpeed*40);
+	  }
+	  return tmp;
+  }else{
+	  if (val>0) {
+		tmp = ((val*10)/127)*(IncSpeed*4);
+	  } else {
+		tmp = ((val*10)/128)*(IncSpeed*4);
+	  }
+	  if (tmp< -(IncSpeed*40)) {
+		tmp = -(IncSpeed*40);
+	  } else if (tmp>(IncSpeed*40)) {
+		tmp = (IncSpeed*40);
+	  }
+	  return tmp;
+  }
 
-  if (val>0) {
-    tmp = ((val*10)/127)*(IncSpeed*4);
-  } else {
-    tmp = ((val*10)/128)*(IncSpeed*4);
-  }
-  if (tmp< -(IncSpeed*40)) {
-    tmp = -(IncSpeed*40);
-  } else if (tmp>(IncSpeed*40)) {
-    tmp = (IncSpeed*40);
-  }
-  return tmp;
 }
 #endif
 
@@ -296,8 +311,8 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         if (y>-5 && y<5) {
           y = 0;
         }
-        x1000 = scaleJoystickTo1K(x);
-        y1000 = scaleJoystickTo1K(y);
+        x1000 = scaleJoystickTo1K(x,FALSE);
+        y1000 = scaleJoystickTo1K(y,TRUE);
         if (REMOTE_useJoystick) {
           REMOTE_HandleMotorMsg(y1000, x1000, 0); /* first param is forward/backward speed, second param is direction */
         }
@@ -319,20 +334,22 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         IncSpeed = 25;
         DRV_SetMode(DRV_MODE_SPEED);
         SHELL_SendString("Remote ON\r\n");
-      } else if (val=='A') { /* red 'C' button */
+      } else if (val=='A') {
     	  LF_StartFollowing(); //LINE Following MANuel & Thomas
-      } else if (val=='B') { /* green 'A' button */
+      } else if (val=='B') {
     	  if(IncSpeed < 300){
     	      IncSpeed += 4;
     	   }
+    	  getConfigPointer(line)->maxSpeedPercent += 10;
       } else if (val=='C') { /* green 'A' button */
-          /*! \todo add functionality */
+    	  TURN_Turn(TURN_LEFT90, NULL);
       }else if (val=='D') { /* green 'A' button */
     	  if(IncSpeed > 10){
     		  IncSpeed -= 4;
     	  }
+    	  getConfigPointer(line)->maxSpeedPercent -= 10;
       }else if (val=='E') { /* green 'A' button */
-          /*! \todo add functionality */
+    	  TURN_Turn(TURN_LEFT180, NULL);
       }
 
 #else
