@@ -14,6 +14,7 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "KIN1.h"
+#include "LCD.h"
 
 
 SemaphoreHandle_t ledSem;//MANUEL
@@ -125,6 +126,11 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_CONTROL_SENDER
 	  Button_Pressed('F'); //MANUEL THOMAS
 #endif
+
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE		//manuel Thomas
+	  DrawSmily();
+#endif
+
 	  LED3_Neg();
 	  break;
 #endif
@@ -133,6 +139,10 @@ void APP_EventHandler(EVNT_Handle event) {
 	  SHELL_SendString("SW7 pressed\r\n");
 #if PL_CONFIG_CONTROL_SENDER
 	  Button_Pressed('G'); //MANUEL THOMAS
+#endif
+
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE		//manuel Thomas
+	  DrawMittelfinger();
 #endif
 
 	  LED3_Neg();

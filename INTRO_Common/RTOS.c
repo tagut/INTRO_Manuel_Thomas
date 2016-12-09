@@ -30,7 +30,7 @@ static void AppTask(void* param) {
 	#if PL_CONFIG_HAS_KEYS
     	KEY_Scan();
 	#endif
-	#if PL_CONFIG_HAS_EVENTS
+	#if PL_CONFIG_HAS_EVENTS //MANUEL
     	EVNT_HandleEvent(APP_EventHandler, TRUE);
 	#endif
     	FRTOS1_vTaskDelay(pdMS_TO_TICKS(50));

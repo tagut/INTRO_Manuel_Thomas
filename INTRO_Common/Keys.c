@@ -1,5 +1,5 @@
 /**
- * \file
+e * \file
  * \brief Key/Switch driver implementation.
  * \author Erich Styger, erich.styger@hslu.ch
  *

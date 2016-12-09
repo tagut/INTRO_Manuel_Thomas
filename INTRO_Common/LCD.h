@@ -30,6 +30,10 @@ void LCD_Deinit(void);
  */
 void LCD_Init(void);
 
+void DrawSmily(void);
+
+void DrawMittelfinger(void);
+
 #endif /* PL_CONFIG_HAS_LCD */
 
 #endif /* SOURCES_LCD_H_ */
