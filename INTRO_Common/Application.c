@@ -14,7 +14,9 @@
 #include "CS1.h"
 #include "Keys.h"
 #include "KIN1.h"
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
 #include "LCD.h"
+#endif
 
 
 SemaphoreHandle_t ledSem;//MANUEL
@@ -46,7 +48,12 @@ SemaphoreHandle_t ledSem;//MANUEL
 
 #if PL_CONFIG_HAS_EVENTS
 void APP_EventHandler(EVNT_Handle event) {
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
+    	if(0){//!JoystickIsOn){ //Joystick off -> normal MODE
   switch(event) {
+#else
+  switch(event) {
+  #endif
   case EVNT_STARTUP:
     //LED1_On(); /* just do something */
 #if PL_CONFIG_HAS_BUZZER
@@ -136,7 +143,7 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_SW7_PRESSED:
 	  SHELL_SendString("SW7 pressed\r\n");
 #if PL_CONFIG_CONTROL_SENDER
-	  Button_Pressed('G'); //MANUEL THOMAS
+	  Button_Pressed('G'); //MANUEL THOMAS  //START
 #endif
 
 
@@ -148,7 +155,10 @@ void APP_EventHandler(EVNT_Handle event) {
 
     /* \todo extend handler as needed */
    } /* switch */
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
+  }//close IF
   LCD_eventHandlerSwitch(event);
+#endif
 }
 #endif /* PL_CONFIG_HAS_EVENTS */
 
