@@ -36,6 +36,16 @@
 #if PL_CONFIG_HAS_SHELL
   #include "Shell.h"
 #endif
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
+#include "LCD.h"
+#include "SW1.h"
+#include "SW2.h"
+#include "SW3.h"
+#include "SW4.h"
+#include "SW5.h"
+#include "SW6.h"
+#include "SW7.h"
+#endif
 
 static bool REMOTE_isOn = FALSE;
 static bool REMOTE_isVerbose = FALSE;
@@ -132,6 +142,34 @@ static void RemoteTask (void *pvParameters) {
   FRTOS1_vTaskDelay(1000/portTICK_PERIOD_MS);
   for(;;) {
     if (REMOTE_isOn) {
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
+    	if(JoystickIsOn){
+    		uint8_t buf[2];
+    		buf[0] = 0;
+    	    buf[1] = 0;
+    	    if(!SW1_GetVal()){ //Right
+    	    	buf[0] = 120;
+    	    }
+    	    if(!SW2_GetVal()){ //Left
+    	    	buf[0] = 0xff-120;
+    	    }
+    	    if(!SW5_GetVal()){ //Front
+
+    	    }
+    	    if(!SW3_GetVal()){ //Back
+
+    	    }
+    	    if(!SW7_GetVal()){ //Oben
+    	    	buf[1] = 127;
+    	    }
+    	    if(!SW6_GetVal()){ //UNTEN
+    	    	buf[1] = 129;
+    	    }
+    	    //buf[1] = 127;
+    	 (void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), RAPP_MSG_TYPE_JOYSTICK_XY, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+    	}
+#endif
+
 #if PL_CONFIG_HAS_JOYSTICK
       if (REMOTE_useJoystick) {
         uint8_t buf[2];
@@ -162,10 +200,12 @@ static void RemoteTask (void *pvParameters) {
         LED1_Neg();
       }
 #endif
-      FRTOS1_vTaskDelay(150/portTICK_PERIOD_MS); 		// old 200 Manuel Thomas
+      //FRTOS1_vTaskDelay(150/portTICK_PERIOD_MS); 		// old 200 Manuel Thomas
     } else {
-      FRTOS1_vTaskDelay(1000/portTICK_PERIOD_MS);
+
+      //FRTOS1_vTaskDelay(150/portTICK_PERIOD_MS); //old 1000
     }
+    FRTOS1_vTaskDelay(150/portTICK_PERIOD_MS); //old 1000
   } /* for */
 }
 #endif

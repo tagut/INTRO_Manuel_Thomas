@@ -23,7 +23,12 @@
 
 /* status variables */
 static bool LedBackLightisOn = TRUE;
+bool JoystickIsOn = FALSE;
 static bool requestLCDUpdate = FALSE;
+uint8 SpeedValueMenue = 0;
+
+static uint8 test = 0;
+
 
 /* this type is declared in PE_Types.h for non-LDD processors, need to declare it locally otherwise */
 //typedef struct {                       /* Image */
@@ -143,6 +148,9 @@ typedef enum {
   LCD_MENU_ID_MAIN,
     LCD_MENU_ID_BACKLIGHT,
     LCD_MENU_ID_NUM_VALUE,
+LCD_MENU_ID_Joystick,
+	LCD_MENU_ID_Joystick_ON,
+	LCD_MENU_ID_Speed
 } LCD_MenuIDs;
 
 static LCDMenu_StatusFlags ValueChangeHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
@@ -172,6 +180,33 @@ static LCDMenu_StatusFlags ValueChangeHandler(const struct LCDMenu_MenuItem_ *it
   return flags;
 }
 
+static LCDMenu_StatusFlags SpeedChangeHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
+
+  static uint8_t valueBuf[16];
+  LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
+
+  (void)item;
+  if (event==LCDMENU_EVENT_GET_TEXT) {
+    UTIL1_strcpy(valueBuf, sizeof(valueBuf), (uint8_t*)"Speed: ");
+    UTIL1_strcatNum32s(valueBuf, sizeof(valueBuf), SpeedValueMenue);
+    *dataP = valueBuf;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_GET_EDIT_TEXT) {
+    UTIL1_strcpy(valueBuf, sizeof(valueBuf), (uint8_t*)"[-] ");
+    UTIL1_strcatNum32s(valueBuf, sizeof(valueBuf), SpeedValueMenue);
+    UTIL1_strcat(valueBuf, sizeof(valueBuf), (uint8_t*)" [+]");
+    *dataP = valueBuf;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_DECREMENT) {
+    SpeedValueMenue--;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_INCREMENT) {
+    SpeedValueMenue++;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  }
+  return flags;
+}
+
 static LCDMenu_StatusFlags BackLightMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
   LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
 
@@ -190,11 +225,41 @@ static LCDMenu_StatusFlags BackLightMenuHandler(const struct LCDMenu_MenuItem_ *
   return flags;
 }
 
+static LCDMenu_StatusFlags JoystickMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
+  LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
+
+  (void)item;
+  if (event==LCDMENU_EVENT_GET_TEXT && dataP!=NULL) {
+    if (JoystickIsOn) {
+      *dataP = "Joystick is ON";
+    } else {
+      *dataP = "Joystick is OFF";
+    }
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_ENTER) { /* toggle setting */
+	  JoystickIsOn = !JoystickIsOn;
+	  if(JoystickIsOn){
+		  Button_Pressed('G'); //MANUEL THOMAS  //START
+		  for(uint8 test = 0;test<SpeedValueMenue;test++){
+			  Button_Pressed('B'); //MANUEL THOMAS  //Speed up
+		  }
+
+	  }else{
+		  Button_Pressed('F'); //MANUEL THOMAS  //Stop
+	  }
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  }
+  return flags;
+}
+
 static const LCDMenu_MenuItem menus[] =
 {/* id,                                     grp, pos,   up,                       down,                             text,           callback                      flags                  */
     {LCD_MENU_ID_MAIN,                        0,   0,   LCD_MENU_ID_NONE,         LCD_MENU_ID_BACKLIGHT,            "General",      NULL,                         LCDMENU_MENU_FLAGS_NONE},
       {LCD_MENU_ID_BACKLIGHT,                 1,   0,   LCD_MENU_ID_MAIN,         LCD_MENU_ID_NONE,                 NULL,           BackLightMenuHandler,         LCDMENU_MENU_FLAGS_NONE},
       {LCD_MENU_ID_NUM_VALUE,                 1,   1,   LCD_MENU_ID_MAIN,         LCD_MENU_ID_NONE,                 NULL,           ValueChangeHandler,           LCDMENU_MENU_FLAGS_EDITABLE},
+	{LCD_MENU_ID_Joystick,                    0,   1,   LCD_MENU_ID_NONE,         LCD_MENU_ID_Joystick_ON,            "Joystick",      NULL,                         LCDMENU_MENU_FLAGS_NONE},
+	  {LCD_MENU_ID_Joystick_ON,               2,   1,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,                 NULL,           JoystickMenuHandler,           LCDMENU_MENU_FLAGS_NONE},
+	  {LCD_MENU_ID_Speed,                     2,   2,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,                 NULL,           SpeedChangeHandler,           LCDMENU_MENU_FLAGS_EDITABLE},
 };
 
 uint8_t LCD_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {
@@ -307,19 +372,19 @@ static void LCD_Task(void *param) {
   (void)param; /* not used */
 #if 1
   ShowTextOnLCD("Press a key!");
-  DrawText();
+  //DrawText();
   /* \todo extend */
-  DrawFont();
-  DrawLines();
+  //DrawFont();
+  //DrawLines();
 
-  GDisp1_Clear();
-  GDisp1_UpdateFull();
-  GDisp1_SetPixel(10,10);
-  GDisp1_UpdateFull();
+  //GDisp1_Clear();
+  //GDisp1_UpdateFull();
+  //GDisp1_SetPixel(10,10);
+  //GDisp1_UpdateFull();
 
   DrawSmily();
-  vTaskDelay(pdMS_TO_TICKS(1000));
-  DrawMittelfinger();
+  vTaskDelay(pdMS_TO_TICKS(500));
+  //DrawMittelfinger();
   //DrawCircles(); MANUEL
 #endif
 #if PL_CONFIG_HAS_LCD_MENU
@@ -337,7 +402,7 @@ static void LCD_Task(void *param) {
       requestLCDUpdate = FALSE;
       LCDMenu_OnEvent(LCDMENU_EVENT_DRAW, NULL);
     }
-#if 1 /*! \todo Change this to for your own needs, or use direct task notification */
+#if 0 /*! \todo Change this to for your own needs, or use direct task notification */
     if (EVNT_EventIsSetAutoClear(EVNT_SW2_PRESSED)) { /* left *///EVNT_LCD_BTN_LEFT
       LCDMenu_OnEvent(LCDMENU_EVENT_LEFT, NULL);
 //      ShowTextOnLCD("left");
@@ -371,6 +436,85 @@ static void LCD_Task(void *param) {
     vTaskDelay(pdMS_TO_TICKS(20));
   }
 }
+void LCD_eventHandlerSwitch(EVNT_Handle event){
+	switch(event) {
+	#if PL_CONFIG_HAS_KEYS
+	  #if PL_CONFIG_NOF_KEYS>=1
+	  case EVNT_SW1_PRESSED:
+		  /* right */ //EVNT_LCD_BTN_RIGHT
+		  if(!JoystickIsOn){
+		        LCDMenu_OnEvent(LCDMENU_EVENT_RIGHT, NULL);
+		  }
+		  //      ShowTextOnLCD("right");
+	    break;
+	  case EVNT_SW1_LPRESSED:
+
+		  break;
+	  #endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>1
+	  case EVNT_SW2_PRESSED:
+		  /* left *///EVNT_LCD_BTN_LEFT
+		  if(!JoystickIsOn){
+		        LCDMenu_OnEvent(LCDMENU_EVENT_LEFT, NULL);
+		  }
+		  //      ShowTextOnLCD("left");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>2
+	  case EVNT_SW3_PRESSED:
+		  /* down */  //EVNT_LCD_BTN_DOWN
+		  if(!JoystickIsOn){
+		        LCDMenu_OnEvent(LCDMENU_EVENT_DOWN, NULL);
+		  }else{
+			  Button_Pressed('B'); //MANUEL THOMAS
+		  }
+		  //      ShowTextOnLCD("down");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>3
+	  case EVNT_SW4_PRESSED:
+		  /* center */ //EVNT_LCD_BTN_CENTER
+		       LCDMenu_OnEvent(LCDMENU_EVENT_ENTER, NULL);
+		 //      ShowTextOnLCD("center");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>4
+	  case EVNT_SW5_PRESSED:
+		  /* up */  //EVNT_LCD_BTN_UP
+		  if(!JoystickIsOn){
+		        LCDMenu_OnEvent(LCDMENU_EVENT_UP, NULL);
+		  }else{
+			  Button_Pressed('A'); //MANUEL THOMAS
+		  }
+
+		  //      ShowTextOnLCD("up");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>5
+	  case EVNT_SW6_PRESSED:
+		  /* side down */ //EVNT_LCD_SIDE_BTN_DOWN
+		  if(!JoystickIsOn){
+		        LCDMenu_OnEvent(LCDMENU_EVENT_DOWN, NULL);
+		  }
+		  //      ShowTextOnLCD("side down");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>6
+	  case EVNT_SW7_PRESSED:
+		  /* side up */ //EVNT_LCD_SIDE_BTN_UP
+		  if(!JoystickIsOn){
+		        LCDMenu_OnEvent(LCDMENU_EVENT_UP, NULL);
+		  }
+		  //      ShowTextOnLCD("side up");
+		  break;
+	#endif
+
+	#endif /* PL_CONFIG_HAS_KEYS */
+
+	    /* \todo extend handler as needed */
+	   } /* switch */
+}
+
 
 void LCD_Deinit(void) {
 #if PL_CONFIG_HAS_LCD_MENU
@@ -380,8 +524,8 @@ void LCD_Deinit(void) {
 
 void LCD_Init(void) {
   LedBackLightisOn =  TRUE;
-  if (xTaskCreate(LCD_Task, "LCD", configMINIMAL_STACK_SIZE+30, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {//&LCDTaskHandle) != pdPASS) {
-    for(;;){} /* error! probably out of memory */
+  if (xTaskCreate(LCD_Task, "LCD", configMINIMAL_STACK_SIZE+100, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {//&LCDTaskHandle) != pdPASS) {
+    for(;;){} /* error! probably out of memory */ //bigger stack old 30
   }
 #if PL_CONFIG_HAS_LCD_MENU
   LCDMenu_Init();
