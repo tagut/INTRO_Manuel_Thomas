@@ -127,9 +127,7 @@ void APP_EventHandler(EVNT_Handle event) {
 	  Button_Pressed('F'); //MANUEL THOMAS
 #endif
 
-#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE		//manuel Thomas
-	  DrawSmily();
-#endif
+
 
 	  LED3_Neg();
 	  break;
@@ -141,9 +139,6 @@ void APP_EventHandler(EVNT_Handle event) {
 	  Button_Pressed('G'); //MANUEL THOMAS
 #endif
 
-#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE		//manuel Thomas
-	  DrawMittelfinger();
-#endif
 
 	  LED3_Neg();
 	  break;
@@ -153,6 +148,7 @@ void APP_EventHandler(EVNT_Handle event) {
 
     /* \todo extend handler as needed */
    } /* switch */
+  LCD_eventHandlerSwitch(event);
 }
 #endif /* PL_CONFIG_HAS_EVENTS */
 

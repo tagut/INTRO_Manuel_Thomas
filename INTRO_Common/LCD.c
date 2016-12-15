@@ -337,7 +337,7 @@ static void LCD_Task(void *param) {
       requestLCDUpdate = FALSE;
       LCDMenu_OnEvent(LCDMENU_EVENT_DRAW, NULL);
     }
-#if 1 /*! \todo Change this to for your own needs, or use direct task notification */
+#if 0 /*! \todo Change this to for your own needs, or use direct task notification */
     if (EVNT_EventIsSetAutoClear(EVNT_SW2_PRESSED)) { /* left *///EVNT_LCD_BTN_LEFT
       LCDMenu_OnEvent(LCDMENU_EVENT_LEFT, NULL);
 //      ShowTextOnLCD("left");
@@ -371,6 +371,68 @@ static void LCD_Task(void *param) {
     vTaskDelay(pdMS_TO_TICKS(20));
   }
 }
+void LCD_eventHandlerSwitch(EVNT_Handle event){
+	switch(event) {
+	#if PL_CONFIG_HAS_KEYS
+	  #if PL_CONFIG_NOF_KEYS>=1
+	  case EVNT_SW1_PRESSED:
+		  /* right */ //EVNT_LCD_BTN_RIGHT
+		        LCDMenu_OnEvent(LCDMENU_EVENT_RIGHT, NULL);
+		  //      ShowTextOnLCD("right");
+	    break;
+	  case EVNT_SW1_LPRESSED:
+
+		  break;
+	  #endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>1
+	  case EVNT_SW2_PRESSED:
+		  /* left *///EVNT_LCD_BTN_LEFT
+		        LCDMenu_OnEvent(LCDMENU_EVENT_LEFT, NULL);
+		  //      ShowTextOnLCD("left");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>2
+	  case EVNT_SW3_PRESSED:
+		  /* down */  //EVNT_LCD_BTN_DOWN
+		        LCDMenu_OnEvent(LCDMENU_EVENT_DOWN, NULL);
+		  //      ShowTextOnLCD("down");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>3
+	  case EVNT_SW4_PRESSED:
+		  /* center */ //EVNT_LCD_BTN_CENTER
+		       LCDMenu_OnEvent(LCDMENU_EVENT_ENTER, NULL);
+		 //      ShowTextOnLCD("center");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>4
+	  case EVNT_SW5_PRESSED:
+		  /* up */  //EVNT_LCD_BTN_UP
+		        LCDMenu_OnEvent(LCDMENU_EVENT_UP, NULL);
+		  //      ShowTextOnLCD("up");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>5
+	  case EVNT_SW6_PRESSED:
+		  /* side down */ //EVNT_LCD_SIDE_BTN_DOWN
+		        LCDMenu_OnEvent(LCDMENU_EVENT_DOWN, NULL);
+		  //      ShowTextOnLCD("side down");
+		  break;
+	#endif
+	#if PL_LOCAL_CONFIG_NOF_KEYS>6
+	  case EVNT_SW7_PRESSED:
+		  /* side up */ //EVNT_LCD_SIDE_BTN_UP
+		        LCDMenu_OnEvent(LCDMENU_EVENT_UP, NULL);
+		  //      ShowTextOnLCD("side up");
+		  break;
+	#endif
+
+	#endif /* PL_CONFIG_HAS_KEYS */
+
+	    /* \todo extend handler as needed */
+	   } /* switch */
+}
+
 
 void LCD_Deinit(void) {
 #if PL_CONFIG_HAS_LCD_MENU

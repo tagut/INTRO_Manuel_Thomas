@@ -16,6 +16,7 @@
 #include "RApp.h"
 #include "RNWK.h"
 #include "RPHY.h"
+#include "Event.h"
 
 uint8_t LCD_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet);
 #endif
@@ -24,6 +25,8 @@ uint8_t LCD_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *dat
  * \brief Driver de-initialization
  */
 void LCD_Deinit(void);
+
+void LCD_eventHandlerSwitch(EVNT_Handle event);
 
 /*!
  * \brief Driver initialization
