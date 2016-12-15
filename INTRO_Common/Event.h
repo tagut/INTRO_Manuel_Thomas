@@ -17,7 +17,7 @@
 typedef enum EVNT_Handle {
   EVNT_STARTUP,            /*!< System startup Event */
   EVNT_LED_HEARTBEAT,     /*!< LED heartbeat */
-#if PL_LOCAL_CONFIG_BOARD_IS_FRDM
+#if PL_LOCAL_CONFIG_BOARD_IS_FRDM || PL_LOCAL_CONFIG_BOARD_IS_ROBO
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   EVNT_SW1_PRESSED,

@@ -30,6 +30,10 @@
 #if PL_CONFIG_HAS_LINE_MAZE
   #include "Maze.h"
 #endif
+#if PL_CONFIG_HAS_RADIO			// by Thomas Manuel
+  #include "RNet_App.h"
+  #include "RNet_AppConfig.h"
+#endif
 
 typedef enum {
   STATE_IDLE,              /* idle, not doing anything */
@@ -105,6 +109,7 @@ static void StateMachine(void) {
              SHELL_SendString((unsigned char*)"TURN!\r\n");
         }else if (currLineKind == REF_LINE_FULL){
             LF_currState = STATE_STOP;
+            ReachedPoint('C');
             SHELL_SendString((unsigned char*)"No line, stopped!\r\n");
         }
 
@@ -204,12 +209,23 @@ uint8_t LF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdI
     *handled = TRUE;
   } else if (UTIL1_strcmp((char*)cmd, (char*)"line start")==0) {
     LF_StartFollowing();
+    ReachedPoint('B');
     *handled = TRUE;
   } else if (UTIL1_strcmp((char*)cmd, (char*)"line stop")==0) {
     LF_StopFollowing();
     *handled = TRUE;
   }
   return res;
+}
+
+void ReachedPoint(char point){
+	#if PL_CONFIG_CONTROL_SENDER
+
+		uint8_t buf[2];
+		buf[0] = 12;
+		buf[1] = (uint8_t)point;
+		(void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), 0xAC, RNETA_GetDestAddr(), RPHY_PACKET_FLAGS_REQ_ACK);
+	#endif
 }
 
 void LF_Deinit(void) {

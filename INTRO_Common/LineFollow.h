@@ -26,6 +26,8 @@ bool LF_IsFollowing(void);
 void LF_Init(void);
 void LF_Deinit(void);
 
+void ReachedPoint(char point);
+
 #endif /* PL_CONFIG_HAS_LINE_FOLLOW */
 
 #endif /* LINEFOLLOW_H_ */

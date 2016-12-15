@@ -60,7 +60,7 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_HAS_KEYS
   #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
-#if PL_CONFIG_CONTROL_SENDER
+#if PL_CONFIG_CONTROL_SENDER && !PL_LOCAL_CONFIG_BOARD_IS_ROBO
 	  Button_Pressed('A'); //MANUEL THOMAS
 #endif
 	  //KEY_Scan();
