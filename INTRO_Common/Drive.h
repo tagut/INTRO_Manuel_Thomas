@@ -52,6 +52,7 @@ uint8_t DRV_Stop(int32_t timeoutMs);
  */
 void DRV_Init(void);
 
+
 /*!
  * \brief Driver de-initialization.
  */

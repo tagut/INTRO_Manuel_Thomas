@@ -20,6 +20,9 @@
   #include "Motor.h"
  #include "Turn.h"
 #endif
+#if PL_CONFIG_HAS_LINE_FOLLOW
+	#include "LineFollow.h"
+#endif
 #if PL_CONFIG_HAS_RADIO
   #include "RNet_App.h"
   #include "RNet_AppConfig.h"
@@ -320,6 +323,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
   (void)packet;
   switch(type) {
 #if PL_CONFIG_HAS_MOTOR
+  	  static uint8_t has_Send = 1;
     case RAPP_MSG_TYPE_JOYSTICK_XY: /* values are -128...127 */
       {
         int8_t x, y;
@@ -372,25 +376,34 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         SHELL_ParseCmd((unsigned char*)"buzzer buz 300 1000");
         REMOTE_SetOnOff(TRUE);
         IncSpeed = 25;
+        getConfigPointer(line)->maxSpeedPercent = 25;
         DRV_SetMode(DRV_MODE_SPEED);
         SHELL_SendString("Remote ON\r\n");
       } else if (val=='A') {
     	  LF_StartFollowing(); //LINE Following MANuel & Thomas
+    	  if(has_Send){
+    	  ReachedPoint('B');
+    	  has_Send = 0;
+    	  }
       } else if (val=='B') {
     	  if(IncSpeed < 300){
     	      IncSpeed += 4;
     	   }
-    	  getConfigPointer(line)->maxSpeedPercent += 10;
+    	 // getConfigPointer(line)->maxSpeedPercent += 10;
       } else if (val=='C') { /* green 'A' button */
     	  TURN_Turn(TURN_LEFT90, NULL);
       }else if (val=='D') { /* green 'A' button */
     	  if(IncSpeed > 10){
     		  IncSpeed -= 4;
     	  }
-    	  getConfigPointer(line)->maxSpeedPercent -= 10;
+    	 // getConfigPointer(line)->maxSpeedPercent -= 10;
       }else if (val=='E') { /* green 'A' button */
     	  TURN_Turn(TURN_LEFT180, NULL);
-      }
+      }else if (val=='H') { /* Imaginary Button */
+    	  getConfigPointer(line)->maxSpeedPercent += 5;
+      }else if (val=='I') { /* Imaginary Button */
+      	  ReachedPoint('T');
+        }
 
 #else
       *handled = FALSE; /* no shell and no buzzer? */
