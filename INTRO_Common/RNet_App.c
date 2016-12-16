@@ -29,7 +29,7 @@
 /* Thomas Manuel */
 #if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
 	static RNWK_ShortAddrType APP_dstAddr = 0x10; /* destination node address */
-#else if PL_LOCAL_CONFIG_BOARD_IS_ROBO
+#elif PL_LOCAL_CONFIG_BOARD_IS_ROBO
 	static RNWK_ShortAddrType APP_dstAddr = 0x11;
 #else
 	static RNWK_ShortAddrType APP_dstAddr = RNWK_ADDR_BROADCAST;
@@ -131,7 +131,14 @@ static void Process(void) {
 }
 
 static void Init(void) {
-  if (RAPP_SetThisNodeAddr(RNWK_ADDR_BROADCAST)!=ERR_OK) { /* set a default address */
+#if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
+#define RNWK_ADDR_INIT (0x11)
+#elif PL_LOCAL_CONFIG_BOARD_IS_ROBO
+#define RNWK_ADDR_INIT (0x10);
+#else
+#define RNWK_ADDR_INIT RNWK_ADDR_BROADCAST
+#endif
+  if (RAPP_SetThisNodeAddr(RNWK_ADDR_INIT)!=ERR_OK) { /* set a default address */
     //APP_DebugPrint((unsigned char*)"ERR: Failed setting node address\r\n");
   }
 }

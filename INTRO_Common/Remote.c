@@ -508,6 +508,8 @@ void REMOTE_Deinit(void) {
 
 /*! \brief Initializes module */
 void REMOTE_Init(void) {
+
+
   REMOTE_isOn = TRUE;
   REMOTE_isVerbose = FALSE;
   REMOTE_useJoystick = TRUE;
