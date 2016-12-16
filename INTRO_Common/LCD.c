@@ -26,6 +26,7 @@ static bool LedBackLightisOn = TRUE;
 bool JoystickIsOn = FALSE;
 static bool requestLCDUpdate = FALSE;
 uint8 SpeedValueMenue = 0;
+uint8 SpeedLineValueMenue = 0;
 
 static uint8 test = 0;
 
@@ -150,7 +151,13 @@ typedef enum {
     LCD_MENU_ID_NUM_VALUE,
 LCD_MENU_ID_Joystick,
 	LCD_MENU_ID_Joystick_ON,
-	LCD_MENU_ID_Speed
+	LCD_MENU_ID_Speed,
+	LCD_MENU_ID_SpeedLine,
+	LCD_MENU_ID_Test,
+LCD_MENU_ID_LCD,
+	LCD_MENU_ID_Smily,
+	LCD_MENU_ID_MittelFinger
+
 } LCD_MenuIDs;
 
 static LCDMenu_StatusFlags ValueChangeHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
@@ -175,6 +182,33 @@ static LCDMenu_StatusFlags ValueChangeHandler(const struct LCDMenu_MenuItem_ *it
     flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
   } else if (event==LCDMENU_EVENT_INCREMENT) {
     value++;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  }
+  return flags;
+}
+
+static LCDMenu_StatusFlags SpeedLineChangeHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
+
+  static uint8_t valueBuf[16];
+  LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
+
+  (void)item;
+  if (event==LCDMENU_EVENT_GET_TEXT) {
+    UTIL1_strcpy(valueBuf, sizeof(valueBuf), (uint8_t*)"SpeedLine: ");
+    UTIL1_strcatNum32s(valueBuf, sizeof(valueBuf), SpeedLineValueMenue);
+    *dataP = valueBuf;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_GET_EDIT_TEXT) {
+    UTIL1_strcpy(valueBuf, sizeof(valueBuf), (uint8_t*)"[-] ");
+    UTIL1_strcatNum32s(valueBuf, sizeof(valueBuf), SpeedLineValueMenue);
+    UTIL1_strcat(valueBuf, sizeof(valueBuf), (uint8_t*)" [+]");
+    *dataP = valueBuf;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_DECREMENT) {
+	  SpeedLineValueMenue--;
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_INCREMENT) {
+	  SpeedLineValueMenue++;
     flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
   }
   return flags;
@@ -225,6 +259,82 @@ static LCDMenu_StatusFlags BackLightMenuHandler(const struct LCDMenu_MenuItem_ *
   return flags;
 }
 
+void ReachedPoint(char point){
+	#if PL_CONFIG_CONTROL_SENDER
+
+		uint8_t buf[2];
+		buf[0] = 12;
+		buf[1] = (uint8_t)point;
+		(void)RAPP_SendPayloadDataBlock(buf, sizeof(buf), 0xAC, 0x12 , RPHY_PACKET_FLAGS_REQ_ACK);//RNETA_GetDestAddr()
+	#endif
+}
+
+
+static LCDMenu_StatusFlags MittelFingerMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
+  LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
+
+  (void)item;
+  if (event==LCDMENU_EVENT_GET_TEXT && dataP!=NULL) {
+	  dataP = "Mittel finger";
+	      /*if (JoystickIsOn) {
+	        *dataP = "Joystick is ON";
+	      } else {
+	        *dataP = "Joystick is OFF";
+	      }*/
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_ENTER) { /* toggle setting */
+	  DrawMittelfinger();
+	  /*
+	  JoystickIsOn = !JoystickIsOn;
+	  if(JoystickIsOn){
+		  Button_Pressed('G'); //MANUEL THOMAS  //START
+		  for(uint8 test = 0;test<SpeedValueMenue;test++){
+			  Button_Pressed('B'); //MANUEL THOMAS  //Speed up
+		  }
+
+		  ReachedPoint('A');
+	  }else{
+		  Button_Pressed('F'); //MANUEL THOMAS  //Stop
+	  }
+	  */
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  }
+  return flags;
+}
+
+static LCDMenu_StatusFlags SmilyMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
+  LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
+
+  (void)item;
+  if (event==LCDMENU_EVENT_GET_TEXT && dataP!=NULL) {
+	  dataP = "Smily";
+    /*if (JoystickIsOn) {
+      *dataP = "Joystick is ON";
+    } else {
+      *dataP = "Joystick is OFF";
+    }*/
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_ENTER) { /* toggle setting */
+	  DrawSmily();
+	  /*
+	  JoystickIsOn = !JoystickIsOn;
+	  if(JoystickIsOn){
+		  Button_Pressed('G'); //MANUEL THOMAS  //START
+		  for(uint8 test = 0;test<SpeedValueMenue;test++){
+			  Button_Pressed('B'); //MANUEL THOMAS  //Speed up
+		  }
+
+		  ReachedPoint('A');
+	  }else{
+		  Button_Pressed('F'); //MANUEL THOMAS  //Stop
+	  }
+	  */
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  }
+  return flags;
+}
+
+
 static LCDMenu_StatusFlags JoystickMenuHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
   LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
 
@@ -243,10 +353,49 @@ static LCDMenu_StatusFlags JoystickMenuHandler(const struct LCDMenu_MenuItem_ *i
 		  for(uint8 test = 0;test<SpeedValueMenue;test++){
 			  Button_Pressed('B'); //MANUEL THOMAS  //Speed up
 		  }
+		  for(uint8 test = 0;test<SpeedLineValueMenue;test++){
+		  	  Button_Pressed('H'); //MANUEL THOMAS  //Speed up
+		  }
 
+		  ReachedPoint('A');
 	  }else{
 		  Button_Pressed('F'); //MANUEL THOMAS  //Stop
 	  }
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  }
+  return flags;
+}
+
+static LCDMenu_StatusFlags JoystickTestHandler(const struct LCDMenu_MenuItem_ *item, LCDMenu_EventType event, void **dataP) {
+  LCDMenu_StatusFlags flags = LCDMENU_STATUS_FLAGS_NONE;
+
+  (void)item;
+  if (event==LCDMENU_EVENT_GET_TEXT && dataP!=NULL) {
+    /*if (JoystickIsOn) {
+      *dataP = "Joystick is ON";
+    } else {
+      *dataP = "Joystick is OFF";
+    }*/
+    flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
+  } else if (event==LCDMENU_EVENT_ENTER) { /* toggle setting */
+	  ReachedPoint('T'); //Send Test
+	  Button_Pressed('I'); //Test on Robot
+	  /*
+	  JoystickIsOn = !JoystickIsOn;
+	  if(JoystickIsOn){
+		  Button_Pressed('G'); //MANUEL THOMAS  //START
+		  for(uint8 test = 0;test<SpeedValueMenue;test++){
+			  Button_Pressed('B'); //MANUEL THOMAS  //Speed up
+		  }
+		  for(uint8 test = 0;test<SpeedLineValueMenue;test++){
+		  	  Button_Pressed('H'); //MANUEL THOMAS  //Speed up
+		  }
+
+		  ReachedPoint('A');
+	  }else{
+		  Button_Pressed('F'); //MANUEL THOMAS  //Stop
+	  }
+	  */
     flags |= LCDMENU_STATUS_FLAGS_HANDLED|LCDMENU_STATUS_FLAGS_UPDATE_VIEW;
   }
   return flags;
@@ -259,7 +408,12 @@ static const LCDMenu_MenuItem menus[] =
       {LCD_MENU_ID_NUM_VALUE,                 1,   1,   LCD_MENU_ID_MAIN,         LCD_MENU_ID_NONE,                 NULL,           ValueChangeHandler,           LCDMENU_MENU_FLAGS_EDITABLE},
 	{LCD_MENU_ID_Joystick,                    0,   1,   LCD_MENU_ID_NONE,         LCD_MENU_ID_Joystick_ON,            "Joystick",      NULL,                         LCDMENU_MENU_FLAGS_NONE},
 	  {LCD_MENU_ID_Joystick_ON,               2,   1,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,                 NULL,           JoystickMenuHandler,           LCDMENU_MENU_FLAGS_NONE},
-	  {LCD_MENU_ID_Speed,                     2,   2,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,                 NULL,           SpeedChangeHandler,           LCDMENU_MENU_FLAGS_EDITABLE},
+	  {LCD_MENU_ID_Test,          		      2,   2,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,            "Test Network",           JoystickTestHandler,           LCDMENU_MENU_FLAGS_NONE},
+	  {LCD_MENU_ID_Speed,                     2,   3,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,                 NULL,           SpeedChangeHandler,           LCDMENU_MENU_FLAGS_EDITABLE},
+	  {LCD_MENU_ID_SpeedLine,                 2,   4,   LCD_MENU_ID_Joystick,         LCD_MENU_ID_NONE,                 NULL,           SpeedLineChangeHandler,       LCDMENU_MENU_FLAGS_EDITABLE},
+    {LCD_MENU_ID_LCD,                         0,   2,   LCD_MENU_ID_NONE,         LCD_MENU_ID_Smily,	            "Display",      NULL,                         LCDMENU_MENU_FLAGS_NONE},
+	  {LCD_MENU_ID_Smily,               	  3,   1,   LCD_MENU_ID_LCD,         LCD_MENU_ID_NONE,                 "Smily",           SmilyMenuHandler,           LCDMENU_MENU_FLAGS_NONE},
+	  {LCD_MENU_ID_MittelFinger,              3,   2,   LCD_MENU_ID_LCD,         LCD_MENU_ID_NONE,                 "Mittel Finger",           MittelFingerMenuHandler,           LCDMENU_MENU_FLAGS_NONE},
 };
 
 uint8_t LCD_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *data, RNWK_ShortAddrType srcAddr, bool *handled, RPHY_PacketDesc *packet) {
@@ -283,6 +437,7 @@ void DrawSmily(void) {
 	smily.pixmap = pixelSmily;
 	GDisp1_DrawMonoBitmap(0,0,&smily,GDisp1_COLOR_BLACK,GDisp1_COLOR_WHITE);
 	GDisp1_UpdateFull();
+	vTaskDelay(pdMS_TO_TICKS(1500));
 }
 
 void DrawMittelfinger(void) {
@@ -295,6 +450,7 @@ void DrawMittelfinger(void) {
 	smily.pixmap = pixelMittelfinger;
 	GDisp1_DrawMonoBitmap(0,0,&smily,GDisp1_COLOR_BLACK,GDisp1_COLOR_WHITE);
 	GDisp1_UpdateFull();
+	vTaskDelay(pdMS_TO_TICKS(1500));
 }
 
 static void DrawLines(void) {
@@ -448,8 +604,12 @@ void LCD_eventHandlerSwitch(EVNT_Handle event){
 		  //      ShowTextOnLCD("right");
 	    break;
 	  case EVNT_SW1_LPRESSED:
-
-		  break;
+	  		  /* right */ //EVNT_LCD_BTN_RIGHT
+	  		  //if(!JoystickIsOn){
+	  		  //      LCDMenu_OnEvent(LCDMENU_EVENT_RIGHT, NULL);
+	  		  //}
+	  		  //      ShowTextOnLCD("right");
+	  	    break;
 	  #endif
 	#if PL_LOCAL_CONFIG_NOF_KEYS>1
 	  case EVNT_SW2_PRESSED:
@@ -466,7 +626,8 @@ void LCD_eventHandlerSwitch(EVNT_Handle event){
 		  if(!JoystickIsOn){
 		        LCDMenu_OnEvent(LCDMENU_EVENT_DOWN, NULL);
 		  }else{
-			  Button_Pressed('B'); //MANUEL THOMAS
+			  //Button_Pressed('B'); //MANUEL THOMAS
+			  Button_Pressed('D'); //Slower
 		  }
 		  //      ShowTextOnLCD("down");
 		  break;
@@ -474,9 +635,18 @@ void LCD_eventHandlerSwitch(EVNT_Handle event){
 	#if PL_LOCAL_CONFIG_NOF_KEYS>3
 	  case EVNT_SW4_PRESSED:
 		  /* center */ //EVNT_LCD_BTN_CENTER
+		  if(!JoystickIsOn){
 		       LCDMenu_OnEvent(LCDMENU_EVENT_ENTER, NULL);
+		  }else{
+			  Button_Pressed('A'); //Begin line following
+		  }
 		 //      ShowTextOnLCD("center");
 		  break;
+	  case EVNT_SW4_LPRESSED:
+	  		  /* center */ //EVNT_LCD_BTN_CENTER
+	  		     LCDMenu_OnEvent(LCDMENU_EVENT_ENTER, NULL);
+	  		 //      ShowTextOnLCD("center");
+	  		  break;
 	#endif
 	#if PL_LOCAL_CONFIG_NOF_KEYS>4
 	  case EVNT_SW5_PRESSED:
@@ -484,7 +654,7 @@ void LCD_eventHandlerSwitch(EVNT_Handle event){
 		  if(!JoystickIsOn){
 		        LCDMenu_OnEvent(LCDMENU_EVENT_UP, NULL);
 		  }else{
-			  Button_Pressed('A'); //MANUEL THOMAS
+			  Button_Pressed('B'); //Faster
 		  }
 
 		  //      ShowTextOnLCD("up");
@@ -495,6 +665,8 @@ void LCD_eventHandlerSwitch(EVNT_Handle event){
 		  /* side down */ //EVNT_LCD_SIDE_BTN_DOWN
 		  if(!JoystickIsOn){
 		        LCDMenu_OnEvent(LCDMENU_EVENT_DOWN, NULL);
+		  }else{
+
 		  }
 		  //      ShowTextOnLCD("side down");
 		  break;
@@ -514,6 +686,7 @@ void LCD_eventHandlerSwitch(EVNT_Handle event){
 	    /* \todo extend handler as needed */
 	   } /* switch */
 }
+
 
 
 void LCD_Deinit(void) {
