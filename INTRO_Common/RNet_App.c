@@ -134,7 +134,8 @@ static void Init(void) {
 #if PL_LOCAL_CONFIG_BOARD_IS_REMOTE
 #define RNWK_ADDR_INIT (0x11)
 #elif PL_LOCAL_CONFIG_BOARD_IS_ROBO
-#define RNWK_ADDR_INIT (0x10);
+#define RNWK_ADDR_INIT (0x10)
+
 #else
 #define RNWK_ADDR_INIT RNWK_ADDR_BROADCAST
 #endif
