@@ -47,6 +47,8 @@ typedef enum {
 #define LF_START_FOLLOWING (1<<0)  /* start line following */
 #define LF_STOP_FOLLOWING  (1<<1)  /* stop line following */
 
+
+uint8_t has_SendC = 1;
 static volatile StateType LF_currState = STATE_IDLE;
 static xTaskHandle LFTaskHandle;
 #if PL_CONFIG_HAS_LINE_MAZE
@@ -54,6 +56,7 @@ static uint8_t LF_solvedIdx = 0; /*  index to iterate through the solution, zero
 #endif
 
 void LF_StartFollowing(void) {
+	has_SendC = 1;
   (void)xTaskNotify(LFTaskHandle, LF_START_FOLLOWING, eSetBits);
 }
 
@@ -109,7 +112,10 @@ static void StateMachine(void) {
              SHELL_SendString((unsigned char*)"TURN!\r\n");
         }else if (currLineKind == REF_LINE_FULL){
             LF_currState = STATE_STOP;
-            ReachedPoint('C');
+            if(has_SendC == 1){
+            	ReachedPoint('C');
+            	has_SendC = 0;
+            }
             SHELL_SendString((unsigned char*)"No line, stopped!\r\n");
         }
 

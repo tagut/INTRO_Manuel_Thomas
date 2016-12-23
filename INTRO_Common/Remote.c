@@ -323,7 +323,7 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
   (void)packet;
   switch(type) {
 #if PL_CONFIG_HAS_MOTOR
-  	  static uint8_t has_Send = 1;
+  	  static uint8_t has_SendB = 1;
     case RAPP_MSG_TYPE_JOYSTICK_XY: /* values are -128...127 */
       {
         int8_t x, y;
@@ -379,11 +379,12 @@ uint8_t REMOTE_HandleRemoteRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *
         getConfigPointer(line)->maxSpeedPercent = 25;
         DRV_SetMode(DRV_MODE_SPEED);
         SHELL_SendString("Remote ON\r\n");
+        has_SendB = 1;
       } else if (val=='A') {
     	  LF_StartFollowing(); //LINE Following MANuel & Thomas
-    	  if(has_Send){
+    	  if(has_SendB){
     	  ReachedPoint('B');
-    	  has_Send = 0;
+    	  has_SendB = 0;
     	  }
       } else if (val=='B') {
     	  if(IncSpeed < 300){
